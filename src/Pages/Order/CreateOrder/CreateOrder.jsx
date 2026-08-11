@@ -3,7 +3,7 @@
 const CreateOrder = () => {
     return (
         <div>
-            <hi>This Create Order</hi>
+            <h1>This Create Order</h1>
         </div>
     );
 };
