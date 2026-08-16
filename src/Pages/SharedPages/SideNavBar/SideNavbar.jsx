@@ -7,6 +7,7 @@ import {
   List,
   Trash2,
   ReceiptText,
+  FilePlus,
 } from "lucide-react";
 import { Outlet } from "react-router";
 
@@ -34,6 +35,11 @@ const SideNavbar = () => {
       name: "Order",
       icon: <ShoppingBag className="size-5 shrink-0" />,
       children: [
+        {
+          name: "Create Order",
+          icon: <FilePlus className="size-4 shrink-0" />,
+          link: "/order/create-order",
+        },
         {
           name: "Order Request",
           icon: <CircleDollarSign className="size-4 shrink-0" />,
