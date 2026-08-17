@@ -1,24 +1,24 @@
 import { useState } from "react";
 
-const ClinicDropdown = ({ clinics, selectedClinic, onSelect }) => {
+const DoctorDropdown = ({ doctors, selectedDoctor, onSelect }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [search, setSearch] = useState('');
 
-  const filteredClinics = clinics?.filter((c) =>
+  const filteredClinics = doctors?.filter((c) =>
     c.name.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
     <div className="relative">
       <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">
-        Select Clinic *
+        Doctor *
       </label>
       <div
         onClick={() => setIsOpen(!isOpen)}
         className="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 text-sm flex justify-between items-center cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500"
       >
-        <span className={selectedClinic ? "text-slate-900 font-semibold" : "text-slate-400"}>
-          {selectedClinic ? selectedClinic.name : "Search & Select Clinic..."}
+        <span className={selectedDoctor ? "text-slate-900 font-semibold" : "text-slate-400"}>
+          {selectedDoctor ? selectedDoctor.name : "Search & Doctor..."}
         </span>
         <span className="text-slate-400 text-xs">▼</span>
       </div>
@@ -34,7 +34,7 @@ const ClinicDropdown = ({ clinics, selectedClinic, onSelect }) => {
           />
           <div className="space-y-1">
             {filteredClinics.length > 0 ? (
-              filteredClinics?.map((clinic) => (
+              filteredClinics.map((clinic) => (
                 <div
                   key={clinic.id}
                   onClick={() => {
@@ -57,4 +57,4 @@ const ClinicDropdown = ({ clinics, selectedClinic, onSelect }) => {
   );
 };
 
-export default ClinicDropdown;
+export default DoctorDropdown;

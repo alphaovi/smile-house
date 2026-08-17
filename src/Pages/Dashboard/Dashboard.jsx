@@ -49,10 +49,10 @@ const Dashboard = () => {
 
       {/* 1. Stat Cards Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <StatCard title="Total Revenue" data={dashboardData.stats.totalSales} icon="💵" />
-        <StatCard title="Active Orders" data={dashboardData.stats.activeOrders} icon="📦" />
+        <StatCard title="Over Due" data={dashboardData.stats.totalSales} icon="💵" />
+        <StatCard title="Pending Cases" data={dashboardData.stats.activeOrders} icon="📦" />
         <StatCard title="Completed Deliveries" data={dashboardData.stats.completedDelivery} icon="✅" />
-        <StatCard title="Pending Shipments" data={dashboardData.stats.pendingDelivery} icon="⏳" />
+        <StatCard title="Today's Delivery" data={dashboardData.stats.pendingDelivery} icon="⏳" />
       </div>
 
       {/* 2. Main Content Grid */}
