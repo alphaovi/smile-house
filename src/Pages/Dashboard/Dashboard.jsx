@@ -51,7 +51,7 @@ const Dashboard = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <StatCard title="Over Due" data={dashboardData.stats.totalSales} icon="💵" />
         <StatCard title="Pending Cases" data={dashboardData.stats.activeOrders} icon="📦" />
-        <StatCard title="Completed Deliveries" data={dashboardData.stats.completedDelivery} icon="✅" />
+        <StatCard title="Have for other option" data={dashboardData.stats.completedDelivery} icon="✅" />
         <StatCard title="Today's Delivery" data={dashboardData.stats.pendingDelivery} icon="⏳" />
       </div>
 

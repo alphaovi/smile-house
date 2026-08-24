@@ -64,7 +64,7 @@ const SideNavbar = () => {
         {
           name: "Customer Payment",
           icon: <CircleDollarSign className="size-4 shrink-0" />,
-          link: "/accounts/payment",
+          link: "/accounts/payment-request",
         },
         {
           name: "Voucher",
