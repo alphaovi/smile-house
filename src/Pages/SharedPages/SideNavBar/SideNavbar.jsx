@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import {
   CircleDollarSign,
   LayoutDashboard,
@@ -9,13 +9,14 @@ import {
   ReceiptText,
   FilePlus,
   CreditCard,
+  Menu,
+  X,
 } from "lucide-react";
-import { Outlet } from "react-router";
-
+import { Outlet, NavLink } from "react-router";
 
 const SideNavbar = () => {
-  
   const sidebarRef = useRef(null);
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
 
   const handleMouseLeave = () => {
     if (sidebarRef.current) {
@@ -82,14 +83,13 @@ const SideNavbar = () => {
   ];
 
   return (
-    <div className="flex h-screen overflow-hidden bg-base-100 ">
-      {/* Sidebar Section */}
+    <div className="flex h-screen overflow-hidden bg-base-100">
+      {/* ---------------- Desktop Sidebar (Unchanged) ---------------- */}
       <aside
         ref={sidebarRef}
         onMouseLeave={handleMouseLeave}
-        className="group z-20 flex flex-col bg-base-200 w-16 hover:w-64 transition-all duration-300 ease-in-out shadow-lg overflow-x-hidden"
+        className="hidden md:flex group z-20 flex-col bg-base-200 w-16 hover:w-64 transition-all duration-300 ease-in-out shadow-lg overflow-x-hidden"
       >
-        {/* Sidebar Menu Items */}
         <ul className="menu w-full p-2 space-y-1 grow pt-10 primaryColor">
           {navItems.map((item, index) => (
             <li key={index}>
@@ -104,45 +104,119 @@ const SideNavbar = () => {
                     </div>
                   </summary>
 
-                  {/* Child Items will show in this Map function */}
-                  <ul className="ml-4 mt-1 border-l-2 border-base-300 pl-2 space-y-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200 ">
+                  <ul className="ml-4 mt-1 border-l-2 border-base-300 pl-2 space-y-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                     {item.children.map((child, childIndex) => (
-                      <li key={childIndex} >
-                        <a
-                          href={child.link || "#"}
+                      <li key={childIndex}>
+                        <NavLink
+                          to={child.link || "#"}
                           className="flex items-center gap-3 py-2 text-sm text-base-content/80 hover:text-primary rounded-md whitespace-nowrap hover:bg-white"
                         >
                           {child.icon && child.icon}
                           <span>{child.name}</span>
-                        </a>
+                        </NavLink>
                       </li>
                     ))}
                   </ul>
                 </details>
               ) : (
-                <a
-                  href={item.link}
+                <NavLink
+                  to={item.link}
                   className="flex items-center gap-4 py-3 hover:bg-base-300 rounded-lg"
                 >
                   {item.icon}
                   <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap font-medium">
                     {item.name}
                   </span>
-                </a>
+                </NavLink>
               )}
             </li>
           ))}
         </ul>
       </aside>
 
-      {/* Main Content Area */}
+      {/* ---------------- Mobile Sidebar Overlay ---------------- */}
+      {isMobileOpen && (
+        <div
+          onClick={() => setIsMobileOpen(false)}
+          className="fixed inset-0 z-40 bg-black/50 md:hidden"
+        />
+      )}
+
+      {/* ---------------- Mobile Drawer Sidebar ---------------- */}
+      <aside
+        className={`fixed top-0 left-0 z-50 h-full w-64 bg-base-200 shadow-2xl transition-transform duration-300 ease-in-out md:hidden flex flex-col ${
+          isMobileOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
+      >
+        <div className="flex items-center justify-between p-4 border-b border-base-300">
+          <span className="font-bold text-lg">Smile House</span>
+          <button
+            onClick={() => setIsMobileOpen(false)}
+            className="p-1 rounded-md hover:bg-base-300"
+          >
+            <X className="size-6" />
+          </button>
+        </div>
+
+        <ul className="menu w-full p-4 space-y-1 grow overflow-y-auto primaryColor">
+          {navItems.map((item, index) => (
+            <li key={index}>
+              {item.children ? (
+                <details>
+                  <summary className="flex items-center justify-between gap-4 py-3 hover:bg-base-300 rounded-lg cursor-pointer">
+                    <div className="flex items-center gap-4">
+                      {item.icon}
+                      <span className="font-medium">{item.name}</span>
+                    </div>
+                  </summary>
+
+                  <ul className="ml-4 mt-1 border-l-2 border-base-300 pl-2 space-y-1">
+                    {item.children.map((child, childIndex) => (
+                      <li key={childIndex}>
+                        <NavLink
+                          to={child.link || "#"}
+                          onClick={() => setIsMobileOpen(false)}
+                          className="flex items-center gap-3 py-2 text-sm text-base-content/80 hover:text-primary rounded-md"
+                        >
+                          {child.icon && child.icon}
+                          <span>{child.name}</span>
+                        </NavLink>
+                      </li>
+                    ))}
+                  </ul>
+                </details>
+              ) : (
+                <NavLink
+                  to={item.link}
+                  onClick={() => setIsMobileOpen(false)}
+                  className="flex items-center gap-4 py-3 hover:bg-base-300 rounded-lg"
+                >
+                  {item.icon}
+                  <span className="font-medium">{item.name}</span>
+                </NavLink>
+              )}
+            </li>
+          ))}
+        </ul>
+      </aside>
+
+      {/* ---------------- Main Content Area ---------------- */}
       <div className="flex flex-1 flex-col overflow-y-auto">
-        <nav className="navbar h-16 w-full bg-base-300 border-b border-base-200 px-4 secondaryColor">
-          <div className="font-bold text-lg ">Smile House</div>
+        <nav className="navbar h-16 w-full bg-base-300 border-b border-base-200 px-4 secondaryColor flex items-center gap-3">
+          {/* Mobile Menu Button (Only visible on mobile/tablet) */}
+          <button
+            onClick={() => setIsMobileOpen(true)}
+            className="md:hidden p-2 rounded-lg hover:bg-base-200 transition-colors"
+            aria-label="Open Menu"
+          >
+            <Menu className="size-6" />
+          </button>
+
+          <div className="font-bold text-lg">Smile House</div>
         </nav>
 
         <div className="m-5">
-          <Outlet></Outlet>
+          <Outlet />
         </div>
       </div>
     </div>
