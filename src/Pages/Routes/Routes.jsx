@@ -6,6 +6,7 @@ import NotFound from "../SharedPages/ErrorPage/NotFound";
 import CreateOrder from "../Order/CreateOrder/CreateOrder";
 import CreateNewOrder from "../Order/CreateOrder/CreateNewOrder";
 import PaymentRequest from "../Accounts/PaymentRequest/PaymentRequest";
+import CreatePayment from "../Accounts/CreatePayment/CreatePayment";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
       {
         path: "order/create-order",
         element: <CreateNewOrder></CreateNewOrder>,
+      },
+      {
+        path: "/accounts/create-payment",
+        element: <CreatePayment></CreatePayment>,
       },
       {
         path: "/accounts/payment-request",

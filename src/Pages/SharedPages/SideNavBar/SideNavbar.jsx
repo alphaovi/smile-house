@@ -8,6 +8,7 @@ import {
   Trash2,
   ReceiptText,
   FilePlus,
+  CreditCard,
 } from "lucide-react";
 import { Outlet } from "react-router";
 
@@ -65,6 +66,11 @@ const SideNavbar = () => {
           name: "Customer Payment",
           icon: <CircleDollarSign className="size-4 shrink-0" />,
           link: "/accounts/payment-request",
+        },
+        {
+          name: "Create Payment",
+          icon: <CreditCard className="size-4 shrink-0" />,
+          link: "/accounts/create-payment",
         },
         {
           name: "Voucher",

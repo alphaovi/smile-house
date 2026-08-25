@@ -1,0 +1,857 @@
+{
+  "doctors": [
+    {
+      "doctor_id": "DOC-1001",
+      "doctor_name": "Dr. Rafiqul Islam",
+      "doctor_mobile": "+8801711112233",
+      "doctor_email": "rafiqul.dent@gmail.com",
+      "clinic_name": "Smile Care Dental Zone",
+      "patients": [
+        {
+          "patient_id": "PAT-2001",
+          "patient_name": "Tanvir Hasan",
+          "age": 28,
+          "gender": "Male",
+          "addresses": [
+            {
+              "address_id": "ADDR-001",
+              "label": "Home",
+              "full_address": "House 12, Road 5, Block B, Mirpur 10",
+              "city": "Dhaka"
+            }
+          ],
+          "images": [
+            {
+              "image_id": "IMG-001",
+              "file_name": "xray_upper_jaw.png",
+              "url": "https://cdn.clinic.com/images/xray_upper_jaw.png",
+              "uploaded_at": "2026-08-01T10:30:00Z"
+            }
+          ],
+          "patient_summary": {
+            "total_cases": 1,
+            "total_amount": 20000,
+            "paid_amount": 11000,
+            "due_amount": 9000
+          },
+          "cases": [
+            {
+              "case_id": "CASE-9001",
+              "created_at": "2026-08-01",
+              "status": "In Progress",
+              "items": [
+                {
+                  "item_id": "ITEM-501",
+                  "group": "Prosthetics",
+                  "type": "Crown & Bridge",
+                  "tooth": "Upper Right Molar (16)",
+                  "jaw_selection": "Upper Jaw",
+                  "size": "Medium",
+                  "price": 6000
+                },
+                {
+                  "item_id": "ITEM-502",
+                  "group": "Orthodontic",
+                  "type": "Clear Aligners",
+                  "tooth": "All Teeth",
+                  "jaw_selection": "Both Jaw",
+                  "size": "Medium",
+                  "price": 14000
+                }
+              ],
+              "invoice": {
+                "invoice_id": "INV-7001",
+                "created_date": "2026-08-01",
+                "total_amount": 20000,
+                "paid_amount": 11000,
+                "due_amount": 9000,
+                "payment_status": "Partial",
+                "payments": [
+                  {
+                    "payment_id": "PAY-801",
+                    "date": "2026-08-05",
+                    "amount": 3000,
+                    "method": "bKash",
+                    "note": "First installment"
+                  },
+                  {
+                    "payment_id": "PAY-802",
+                    "date": "2026-08-08",
+                    "amount": 6000,
+                    "method": "Cash",
+                    "note": "Second installment"
+                  },
+                  {
+                    "payment_id": "PAY-803",
+                    "date": "2026-08-10",
+                    "amount": 2000,
+                    "method": "Card",
+                    "note": "Third installment"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "patient_id": "PAT-2002",
+          "patient_name": "Nusrat Jahan",
+          "age": 34,
+          "gender": "Female",
+          "addresses": [
+            {
+              "address_id": "ADDR-002",
+              "label": "Home",
+              "full_address": "Flat 3A, House 45, Dhanmondi 27",
+              "city": "Dhaka"
+            }
+          ],
+          "images": [],
+          "patient_summary": {
+            "total_cases": 1,
+            "total_amount": 8000,
+            "paid_amount": 8000,
+            "due_amount": 0
+          },
+          "cases": [
+            {
+              "case_id": "CASE-9002",
+              "created_at": "2026-08-10",
+              "status": "Completed",
+              "items": [
+                {
+                  "item_id": "ITEM-503",
+                  "group": "Endodontics",
+                  "type": "Root Canal Treatment",
+                  "tooth": "Lower Left Premolar (34)",
+                  "jaw_selection": "Lower Jaw",
+                  "size": "Small",
+                  "price": 8000
+                }
+              ],
+              "invoice": {
+                "invoice_id": "INV-7002",
+                "created_date": "2026-08-10",
+                "total_amount": 8000,
+                "paid_amount": 8000,
+                "due_amount": 0,
+                "payment_status": "Paid",
+                "payments": [
+                  {
+                    "payment_id": "PAY-804",
+                    "date": "2026-08-10",
+                    "amount": 8000,
+                    "method": "Cash",
+                    "note": "Full payment on service"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "patient_id": "PAT-2007",
+          "patient_name": "Sadia Rahman",
+          "age": 20,
+          "gender": "Female",
+          "addresses": [
+            {
+              "address_id": "ADDR-007",
+              "label": "Hostel",
+              "full_address": "Hall 2, Dhaka University Campus",
+              "city": "Dhaka"
+            }
+          ],
+          "images": [],
+          "patient_summary": {
+            "total_cases": 1,
+            "total_amount": 45000,
+            "paid_amount": 25000,
+            "due_amount": 20000
+          },
+          "cases": [
+            {
+              "case_id": "CASE-9007",
+              "created_at": "2026-07-20",
+              "status": "In Progress",
+              "items": [
+                {
+                  "item_id": "ITEM-508",
+                  "group": "Orthodontic",
+                  "type": "Metal Braces",
+                  "tooth": "Full Mouth",
+                  "jaw_selection": "Both Jaw",
+                  "size": "Medium",
+                  "price": 45000
+                }
+              ],
+              "invoice": {
+                "invoice_id": "INV-7007",
+                "created_date": "2026-07-20",
+                "total_amount": 45000,
+                "paid_amount": 25000,
+                "due_amount": 20000,
+                "payment_status": "Partial",
+                "payments": [
+                  {
+                    "payment_id": "PAY-810",
+                    "date": "2026-07-20",
+                    "amount": 15000,
+                    "method": "bKash",
+                    "note": "Down payment"
+                  },
+                  {
+                    "payment_id": "PAY-811",
+                    "date": "2026-08-20",
+                    "amount": 10000,
+                    "method": "Cash",
+                    "note": "Monthly adjustment"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "patient_id": "PAT-2008",
+          "patient_name": "Imtiaz Ahmed",
+          "age": 39,
+          "gender": "Male",
+          "addresses": [
+            {
+              "address_id": "ADDR-008",
+              "label": "Home",
+              "full_address": "Kaptan Bazar, Wari",
+              "city": "Dhaka"
+            }
+          ],
+          "images": [],
+          "patient_summary": {
+            "total_cases": 1,
+            "total_amount": 7000,
+            "paid_amount": 7000,
+            "due_amount": 0
+          },
+          "cases": [
+            {
+              "case_id": "CASE-9008",
+              "created_at": "2026-08-11",
+              "status": "Completed",
+              "items": [
+                {
+                  "item_id": "ITEM-509",
+                  "group": "Surgery",
+                  "type": "Wisdom Tooth Extraction",
+                  "tooth": "Lower Third Molar (48)",
+                  "jaw_selection": "Lower Jaw",
+                  "size": "Large",
+                  "price": 7000
+                }
+              ],
+              "invoice": {
+                "invoice_id": "INV-7008",
+                "created_date": "2026-08-11",
+                "total_amount": 7000,
+                "paid_amount": 7000,
+                "due_amount": 0,
+                "payment_status": "Paid",
+                "payments": [
+                  {
+                    "payment_id": "PAY-812",
+                    "date": "2026-08-11",
+                    "amount": 7000,
+                    "method": "Cash",
+                    "note": "Full payment"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "patient_id": "PAT-2009",
+          "patient_name": "Shirin Akter",
+          "age": 29,
+          "gender": "Female",
+          "addresses": [
+            {
+              "address_id": "ADDR-009",
+              "label": "Home",
+              "full_address": "Lalbagh Fort Road",
+              "city": "Dhaka"
+            }
+          ],
+          "images": [],
+          "patient_summary": {
+            "total_cases": 1,
+            "total_amount": 2000,
+            "paid_amount": 2000,
+            "due_amount": 0
+          },
+          "cases": [
+            {
+              "case_id": "CASE-9009",
+              "created_at": "2026-08-17",
+              "status": "Completed",
+              "items": [
+                {
+                  "item_id": "ITEM-510",
+                  "group": "Restorative",
+                  "type": "Composite Filling",
+                  "tooth": "Upper Premolar (14)",
+                  "jaw_selection": "Upper Jaw",
+                  "size": "Small",
+                  "price": 2000
+                }
+              ],
+              "invoice": {
+                "invoice_id": "INV-7009",
+                "created_date": "2026-08-17",
+                "total_amount": 2000,
+                "paid_amount": 2000,
+                "due_amount": 0,
+                "payment_status": "Paid",
+                "payments": [
+                  {
+                    "payment_id": "PAY-813",
+                    "date": "2026-08-17",
+                    "amount": 2000,
+                    "method": "Nagad",
+                    "note": "Paid in full"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "patient_id": "PAT-2010",
+          "patient_name": "Robiul Islam",
+          "age": 36,
+          "gender": "Male",
+          "addresses": [
+            {
+              "address_id": "ADDR-010",
+              "label": "Home",
+              "full_address": "Kazipara Main Road",
+              "city": "Dhaka"
+            }
+          ],
+          "images": [],
+          "patient_summary": {
+            "total_cases": 1,
+            "total_amount": 9000,
+            "paid_amount": 4000,
+            "due_amount": 5000
+          },
+          "cases": [
+            {
+              "case_id": "CASE-9010",
+              "created_at": "2026-08-05",
+              "status": "In Progress",
+              "items": [
+                {
+                  "item_id": "ITEM-511",
+                  "group": "Endodontics",
+                  "type": "Root Canal Treatment",
+                  "tooth": "Lower Right Molar (47)",
+                  "jaw_selection": "Lower Jaw",
+                  "size": "Medium",
+                  "price": 9000
+                }
+              ],
+              "invoice": {
+                "invoice_id": "INV-7010",
+                "created_date": "2026-08-05",
+                "total_amount": 9000,
+                "paid_amount": 4000,
+                "due_amount": 5000,
+                "payment_status": "Partial",
+                "payments": [
+                  {
+                    "payment_id": "PAY-814",
+                    "date": "2026-08-05",
+                    "amount": 4000,
+                    "method": "Cash",
+                    "note": "First sitting"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "patient_id": "PAT-2011",
+          "patient_name": "Mahmuda Begum",
+          "age": 60,
+          "gender": "Female",
+          "addresses": [
+            {
+              "address_id": "ADDR-011",
+              "label": "Home",
+              "full_address": "Shewrapara, Rokeya Sarani",
+              "city": "Dhaka"
+            }
+          ],
+          "images": [],
+          "patient_summary": {
+            "total_cases": 1,
+            "total_amount": 28000,
+            "paid_amount": 18000,
+            "due_amount": 10000
+          },
+          "cases": [
+            {
+              "case_id": "CASE-9011",
+              "created_at": "2026-08-01",
+              "status": "In Progress",
+              "items": [
+                {
+                  "item_id": "ITEM-512",
+                  "group": "Prosthetics",
+                  "type": "Complete Denture Set",
+                  "tooth": "Full Mouth",
+                  "jaw_selection": "Both Jaw",
+                  "size": "Large",
+                  "price": 28000
+                }
+              ],
+              "invoice": {
+                "invoice_id": "INV-7011",
+                "created_date": "2026-08-01",
+                "total_amount": 28000,
+                "paid_amount": 18000,
+                "due_amount": 10000,
+                "payment_status": "Partial",
+                "payments": [
+                  {
+                    "payment_id": "PAY-815",
+                    "date": "2026-08-01",
+                    "amount": 10000,
+                    "method": "Cash",
+                    "note": "Impression phase"
+                  },
+                  {
+                    "payment_id": "PAY-816",
+                    "date": "2026-08-15",
+                    "amount": 8000,
+                    "method": "bKash",
+                    "note": "Trial phase"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "doctor_id": "DOC-1002",
+      "doctor_name": "Dr. Sabrin Sultana",
+      "doctor_mobile": "+8801822223344",
+      "doctor_email": "sabrin.dental@yahoo.com",
+      "clinic_name": "Apex Dental & Implant Center",
+      "patients": [
+        {
+          "patient_id": "PAT-2004",
+          "patient_name": "Mehedi Hasan",
+          "age": 23,
+          "gender": "Male",
+          "addresses": [
+            {
+              "address_id": "ADDR-004",
+              "label": "Home",
+              "full_address": "45/A Gulshan Avenue",
+              "city": "Dhaka"
+            }
+          ],
+          "images": [],
+          "patient_summary": {
+            "total_cases": 1,
+            "total_amount": 35000,
+            "paid_amount": 20000,
+            "due_amount": 15000
+          },
+          "cases": [
+            {
+              "case_id": "CASE-9004",
+              "created_at": "2026-08-02",
+              "status": "In Progress",
+              "items": [
+                {
+                  "item_id": "ITEM-505",
+                  "group": "Implant",
+                  "type": "Titanium Implant",
+                  "tooth": "Lower Right Molar (46)",
+                  "jaw_selection": "Lower Jaw",
+                  "size": "Medium",
+                  "price": 35000
+                }
+              ],
+              "invoice": {
+                "invoice_id": "INV-7004",
+                "created_date": "2026-08-02",
+                "total_amount": 35000,
+                "paid_amount": 20000,
+                "due_amount": 15000,
+                "payment_status": "Partial",
+                "payments": [
+                  {
+                    "payment_id": "PAY-806",
+                    "date": "2026-08-02",
+                    "amount": 10000,
+                    "method": "Bank Transfer",
+                    "note": "Initial booking"
+                  },
+                  {
+                    "payment_id": "PAY-807",
+                    "date": "2026-08-15",
+                    "amount": 10000,
+                    "method": "Cash",
+                    "note": "Surgery date payment"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "patient_id": "PAT-2005",
+          "patient_name": "Farhana Chowdhury",
+          "age": 31,
+          "gender": "Female",
+          "addresses": [
+            {
+              "address_id": "ADDR-005",
+              "label": "Home",
+              "full_address": "Banani Block F, Road 11",
+              "city": "Dhaka"
+            }
+          ],
+          "images": [],
+          "patient_summary": {
+            "total_cases": 1,
+            "total_amount": 24000,
+            "paid_amount": 12000,
+            "due_amount": 12000
+          },
+          "cases": [
+            {
+              "case_id": "CASE-9005",
+              "created_at": "2026-08-14",
+              "status": "In Progress",
+              "items": [
+                {
+                  "item_id": "ITEM-506",
+                  "group": "Cosmetic",
+                  "type": "Veneers",
+                  "tooth": "Upper Anterior (11, 12, 21, 22)",
+                  "jaw_selection": "Upper Jaw",
+                  "size": "Small",
+                  "price": 24000
+                }
+              ],
+              "invoice": {
+                "invoice_id": "INV-7005",
+                "created_date": "2026-08-14",
+                "total_amount": 24000,
+                "paid_amount": 12000,
+                "due_amount": 12000,
+                "payment_status": "Partial",
+                "payments": [
+                  {
+                    "payment_id": "PAY-808",
+                    "date": "2026-08-14",
+                    "amount": 12000,
+                    "method": "Card",
+                    "note": "50% advance"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "patient_id": "PAT-2006",
+          "patient_name": "Kamrul Arefin",
+          "age": 52,
+          "gender": "Male",
+          "addresses": [
+            {
+              "address_id": "ADDR-006",
+              "label": "Home",
+              "full_address": "Mohakhali DOHS, Road 4",
+              "city": "Dhaka"
+            }
+          ],
+          "images": [],
+          "patient_summary": {
+            "total_cases": 1,
+            "total_amount": 2500,
+            "paid_amount": 2500,
+            "due_amount": 0
+          },
+          "cases": [
+            {
+              "case_id": "CASE-9006",
+              "created_at": "2026-08-18",
+              "status": "Completed",
+              "items": [
+                {
+                  "item_id": "ITEM-507",
+                  "group": "Preventive",
+                  "type": "Scaling & Polishing",
+                  "tooth": "Full Mouth",
+                  "jaw_selection": "Both Jaw",
+                  "size": "Medium",
+                  "price": 2500
+                }
+              ],
+              "invoice": {
+                "invoice_id": "INV-7006",
+                "created_date": "2026-08-18",
+                "total_amount": 2500,
+                "paid_amount": 2500,
+                "due_amount": 0,
+                "payment_status": "Paid",
+                "payments": [
+                  {
+                    "payment_id": "PAY-809",
+                    "date": "2026-08-18",
+                    "amount": 2500,
+                    "method": "Cash",
+                    "note": "Cleared bill"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "patient_id": "PAT-2012",
+          "patient_name": "Zahid Hasan",
+          "age": 27,
+          "gender": "Male",
+          "addresses": [
+            {
+              "address_id": "ADDR-012",
+              "label": "Home",
+              "full_address": "Agargaon T&T Colony",
+              "city": "Dhaka"
+            }
+          ],
+          "images": [],
+          "patient_summary": {
+            "total_cases": 1,
+            "total_amount": 10000,
+            "paid_amount": 10000,
+            "due_amount": 0
+          },
+          "cases": [
+            {
+              "case_id": "CASE-9012",
+              "created_at": "2026-08-22",
+              "status": "Completed",
+              "items": [
+                {
+                  "item_id": "ITEM-513",
+                  "group": "Cosmetic",
+                  "type": "Teeth Whitening",
+                  "tooth": "Full Mouth",
+                  "jaw_selection": "Both Jaw",
+                  "size": "Medium",
+                  "price": 10000
+                }
+              ],
+              "invoice": {
+                "invoice_id": "INV-7012",
+                "created_date": "2026-08-22",
+                "total_amount": 10000,
+                "paid_amount": 10000,
+                "due_amount": 0,
+                "payment_status": "Paid",
+                "payments": [
+                  {
+                    "payment_id": "PAY-817",
+                    "date": "2026-08-22",
+                    "amount": 10000,
+                    "method": "Card",
+                    "note": "Full payment"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "patient_id": "PAT-2013",
+          "patient_name": "Afroza Sultana",
+          "age": 33,
+          "gender": "Female",
+          "addresses": [
+            {
+              "address_id": "ADDR-013",
+              "label": "Home",
+              "full_address": "Kallyanpur Bus Stand Road",
+              "city": "Dhaka"
+            }
+          ],
+          "images": [],
+          "patient_summary": {
+            "total_cases": 1,
+            "total_amount": 1800,
+            "paid_amount": 1800,
+            "due_amount": 0
+          },
+          "cases": [
+            {
+              "case_id": "CASE-9013",
+              "created_at": "2026-08-09",
+              "status": "Completed",
+              "items": [
+                {
+                  "item_id": "ITEM-514",
+                  "group": "Restorative",
+                  "type": "Glass Ionomer Filling",
+                  "tooth": "Lower Molar (36)",
+                  "jaw_selection": "Lower Jaw",
+                  "size": "Small",
+                  "price": 1800
+                }
+              ],
+              "invoice": {
+                "invoice_id": "INV-7013",
+                "created_date": "2026-08-09",
+                "total_amount": 1800,
+                "paid_amount": 1800,
+                "due_amount": 0,
+                "payment_status": "Paid",
+                "payments": [
+                  {
+                    "payment_id": "PAY-818",
+                    "date": "2026-08-09",
+                    "amount": 1800,
+                    "method": "Cash",
+                    "note": "Paid on spot"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "patient_id": "PAT-2014",
+          "patient_name": "Babul Akter",
+          "age": 48,
+          "gender": "Male",
+          "addresses": [
+            {
+              "address_id": "ADDR-014",
+              "label": "Home",
+              "full_address": "Shyamoli Ring Road",
+              "city": "Dhaka"
+            }
+          ],
+          "images": [],
+          "patient_summary": {
+            "total_cases": 1,
+            "total_amount": 12000,
+            "paid_amount": 6000,
+            "due_amount": 6000
+          },
+          "cases": [
+            {
+              "case_id": "CASE-9014",
+              "created_at": "2026-08-03",
+              "status": "In Progress",
+              "items": [
+                {
+                  "item_id": "ITEM-515",
+                  "group": "Prosthetics",
+                  "type": "Zirconia Crown",
+                  "tooth": "Upper Canine (13)",
+                  "jaw_selection": "Upper Jaw",
+                  "size": "Small",
+                  "price": 12000
+                }
+              ],
+              "invoice": {
+                "invoice_id": "INV-7014",
+                "created_date": "2026-08-03",
+                "total_amount": 12000,
+                "paid_amount": 6000,
+                "due_amount": 6000,
+                "payment_status": "Partial",
+                "payments": [
+                  {
+                    "payment_id": "PAY-819",
+                    "date": "2026-08-03",
+                    "amount": 6000,
+                    "method": "Nagad",
+                    "note": "50% advance"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "patient_id": "PAT-2015",
+          "patient_name": "Roksana Parvin",
+          "age": 41,
+          "gender": "Female",
+          "addresses": [
+            {
+              "address_id": "ADDR-015",
+              "label": "Home",
+              "full_address": "Adabor Road 10",
+              "city": "Dhaka"
+            }
+          ],
+          "images": [],
+          "patient_summary": {
+            "total_cases": 1,
+            "total_amount": 5000,
+            "paid_amount": 5000,
+            "due_amount": 0
+          },
+          "cases": [
+            {
+              "case_id": "CASE-9015",
+              "created_at": "2026-08-19",
+              "status": "Completed",
+              "items": [
+                {
+                  "item_id": "ITEM-516",
+                  "group": "Periodontics",
+                  "type": "Deep Scaling & Curettage",
+                  "tooth": "Full Mouth",
+                  "jaw_selection": "Both Jaw",
+                  "size": "Medium",
+                  "price": 5000
+                }
+              ],
+              "invoice": {
+                "invoice_id": "INV-7015",
+                "created_date": "2026-08-19",
+                "total_amount": 5000,
+                "paid_amount": 5000,
+                "due_amount": 0,
+                "payment_status": "Paid",
+                "payments": [
+                  {
+                    "payment_id": "PAY-820",
+                    "date": "2026-08-19",
+                    "amount": 5000,
+                    "method": "Cash",
+                    "note": "Full payment"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
