@@ -11,6 +11,7 @@ import {
   CreditCard,
   Menu,
   X,
+  Receipt,
 } from "lucide-react";
 import { Outlet, NavLink } from "react-router";
 
@@ -43,9 +44,9 @@ const SideNavbar = () => {
           link: "/order/create-order",
         },
         {
-          name: "Order Request",
+          name: "Requested Order",
           icon: <CircleDollarSign className="size-4 shrink-0" />,
-          link: "/order/order-request",
+          link: "/order/requested-order",
         },
         {
           name: "Order List",
@@ -64,7 +65,7 @@ const SideNavbar = () => {
       icon: <Users className="size-5 shrink-0" />,
       children: [
         {
-          name: "Customer Payment",
+          name: "Payment Request",
           icon: <CircleDollarSign className="size-4 shrink-0" />,
           link: "/accounts/payment-request",
         },
@@ -72,6 +73,11 @@ const SideNavbar = () => {
           name: "Create Payment",
           icon: <CreditCard className="size-4 shrink-0" />,
           link: "/accounts/create-payment",
+        },
+        {
+          name: "View Payment",
+          icon: <Receipt className="size-4 shrink-0" />,
+          link: "/accounts/view-payment",
         },
         {
           name: "Voucher",

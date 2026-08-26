@@ -446,6 +446,24 @@
       ]
     },
     {
+    "id": "B07724",
+    "paymentDate": "30-08-2023",
+    "clientName": "Suriati Dental Clinic @ Senyang Waterfront [S00068]",
+    "paymentBy": "Md Asrar Alim",
+    "reference": "2354312 - 2354363- 2354392 =530+160+120",
+    "paymentType": "Account Transfer",
+    "paymentAmount": "810.00"
+  },
+  {
+    "id": "B07723",
+    "paymentDate": "30-08-2023",
+    "clientName": "Klinik Pergigian Suriani, Seriabak [S00163]",
+    "paymentBy": "Md Asrar Alim",
+    "reference": "Harban - mahvani - unknown = 384+80+80",
+    "paymentType": "Account Transfer",
+    "paymentAmount": "544.00"
+  },
+    {
       "doctor_id": "DOC-1002",
       "doctor_name": "Dr. Sabrin Sultana",
       "doctor_mobile": "+8801822223344",

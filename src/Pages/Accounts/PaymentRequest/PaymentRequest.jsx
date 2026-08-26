@@ -131,7 +131,7 @@ const PaymentRequest = () => {
       <ToastContainer />
 
       <div>
-        <h1 className="font-bold text-center underline">Request Payment</h1>
+        <h1 className="font-bold text-center underline">Payment Request</h1>
       </div>
       <div style={styles.container}>
         <table style={styles.table}>
