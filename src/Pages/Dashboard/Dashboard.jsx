@@ -1,69 +1,96 @@
-import RecentOrders from "./DashboardComponents/RecentOrder";
-import SalesAnalytics from "./DashboardComponents/SalesAnalysis";
-import StatCard from "./DashboardComponents/StatCard";
-import TopProducts from "./DashboardComponents/TopProducts";
-
-
-// Centralized Data Object
-const dashboardData = {
-  stats: {
-    totalSales: { value: "$128,450", growth: "+14.2%", positive: true },
-    activeOrders: { value: "342", growth: "+8.1%", positive: true },
-    completedDelivery: { value: "1,280", growth: "+5.4%", positive: true },
-    pendingDelivery: { value: "24", growth: "-2.3%", positive: false }
-  },
-  analytics: [
-    { month: 'Jan', amount: 35, percentage: 45 },
-    { month: 'Feb', amount: 48, percentage: 60 },
-    { month: 'Mar', amount: 62, percentage: 75 },
-    { month: 'Apr', amount: 55, percentage: 68 },
-    { month: 'May', amount: 80, percentage: 95 },
-    { month: 'Jun', amount: 74, percentage: 88 }
-  ],
-  recentOrders: [
-    { id: "ORD-9021", client: "Apex Dental Clinic", item: "Digital X-Ray Sensor", status: "Completed", amount: "$3,200", date: "16 Aug 2026" },
-    { id: "ORD-9022", client: "Smile Care Lab", item: "Ultrasonic Scaler Unit", status: "Pending", amount: "$850", date: "16 Aug 2026" },
-    { id: "ORD-9023", client: "City Dental Care", item: "Ergonomic Dental Chair", status: "Processing", amount: "$4,500", date: "15 Aug 2026" },
-    { id: "ORD-9024", client: "Metro Orthodontics", item: "Autoclave Sterilizer", status: "Completed", amount: "$1,800", date: "14 Aug 2026" }
-  ],
-  topProducts: [
-    { name: "3D Intraoral Scanner", sales: 142, stock: "18 units" },
-    { name: "LED Curing Light Probe", sales: 98, stock: "45 units" },
-    { name: "High-Speed Handpiece Kit", sales: 76, stock: "12 units" }
-  ]
-};
+import OverDueCard from "./OverDue/OverDueCard";
+import PublicNotesWidget from "./PublicNotes/PublicNotesWidget";
+import RecentOrdersWidget from "./RecentOrder/RecentOrderWidget";
 
 const Dashboard = () => {
   return (
-    <div className="p-6 md:p-10 space-y-8 bg-slate-50 min-h-screen">
-      {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div>
-          <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">Overview Dashboard</h1>
-          <p className="text-slate-500 text-sm mt-1">Real-time dental equipment sales & logistics analysis</p>
+    <div className="p-6 md:p-8 bg-slate-50/70 min-h-screen space-y-8">
+      {/* Top Cards Row: 3 Premium Dark-Styled Cards Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        {/* 1. Over Due Card (Royal Crimson Dark Theme) */}
+        <OverDueCard amount="$128,450" />
+        
+        {/* 2. Case In Process (Electric Indigo Dark Theme) */}
+        <div className="relative group cursor-pointer transition-all duration-300 hover:-translate-y-1">
+          {/* Subtle Outer Glow */}
+          <div className="absolute -inset-1 bg-gradient-to-r from-indigo-500 via-blue-500 to-sky-400 rounded-[30px] opacity-35 blur-lg group-hover:opacity-60 transition duration-500" />
+
+          {/* Main Card Surface */}
+          <div className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-indigo-950 text-white rounded-[26px] p-6 shadow-2xl shadow-indigo-950/40 border border-white/10 overflow-hidden flex flex-col justify-between">
+            
+            {/* Background Decorative Mesh Glow */}
+            <div className="absolute -right-10 -top-10 w-36 h-36 bg-indigo-500/20 rounded-full blur-2xl pointer-events-none group-hover:bg-indigo-500/30 transition-all" />
+
+            {/* Header */}
+            <div className="flex justify-between items-center mb-6 relative z-10">
+              <span className="text-[11px] font-black uppercase tracking-wider text-indigo-200 bg-indigo-500/20 px-3.5 py-1 rounded-full border border-indigo-400/30 backdrop-blur-md">
+                Case In Process
+              </span>
+
+              <div className="w-11 h-11 rounded-2xl bg-gradient-to-tr from-indigo-500 to-sky-400 p-[1.5px] shadow-lg shadow-indigo-500/30 group-hover:scale-110 transition-transform duration-300">
+                <div className="w-full h-full bg-slate-900/90 rounded-[14px] flex items-center justify-center text-lg">
+                  📦
+                </div>
+              </div>
+            </div>
+
+            {/* Content */}
+            <div className="relative z-10 mt-1">
+              <h3 className="text-3.5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-100 to-indigo-100 tracking-tight leading-none">
+                342
+              </h3>
+              <p className="text-[11px] font-bold text-indigo-200/70 mt-2.5 flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 inline-block" />
+                Active lab cases currently in progress
+              </p>
+            </div>
+          </div>
         </div>
-        <button className="self-start md:self-auto px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-xl shadow-md shadow-blue-500/20 transition-all active:scale-95">
-          + New Equipment Order
-        </button>
+
+        {/* 3. Today's Delivery (Emerald & Teal Forest Dark Theme) */}
+        <div className="relative group cursor-pointer transition-all duration-300 hover:-translate-y-1">
+          {/* Subtle Outer Glow */}
+          <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500 via-teal-400 to-cyan-400 rounded-[30px] opacity-35 blur-lg group-hover:opacity-60 transition duration-500" />
+
+          {/* Main Card Surface */}
+          <div className="relative bg-gradient-to-br from-slate-900 via-slate-800 to-emerald-950 text-white rounded-[26px] p-6 shadow-2xl shadow-emerald-950/40 border border-white/10 overflow-hidden flex flex-col justify-between">
+            
+            {/* Background Decorative Mesh Glow */}
+            <div className="absolute -right-10 -top-10 w-36 h-36 bg-emerald-500/20 rounded-full blur-2xl pointer-events-none group-hover:bg-emerald-500/30 transition-all" />
+
+            {/* Header */}
+            <div className="flex justify-between items-center mb-6 relative z-10">
+              <span className="text-[11px] font-black uppercase tracking-wider text-emerald-200 bg-emerald-500/20 px-3.5 py-1 rounded-full border border-emerald-400/30 backdrop-blur-md">
+                Today's Delivery
+              </span>
+
+              <div className="w-11 h-11 rounded-2xl bg-gradient-to-tr from-emerald-500 to-teal-400 p-[1.5px] shadow-lg shadow-emerald-500/30 group-hover:scale-110 transition-transform duration-300">
+                <div className="w-full h-full bg-slate-900/90 rounded-[14px] flex items-center justify-center text-lg">
+                  🚚
+                </div>
+              </div>
+            </div>
+
+            {/* Content */}
+            <div className="relative z-10 mt-1">
+              <h3 className="text-3.5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-100 to-emerald-100 tracking-tight leading-none">
+                24
+              </h3>
+              <p className="text-[11px] font-bold text-emerald-200/70 mt-2.5 flex items-center gap-2">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block" />
+                Scheduled orders ready for dispatch
+              </p>
+            </div>
+          </div>
+        </div>
+
       </div>
 
-      {/* 1. Stat Cards Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <StatCard title="Over Due" data={dashboardData.stats.totalSales} icon="💵" />
-        <StatCard title="Pending Cases" data={dashboardData.stats.activeOrders} icon="📦" />
-        <StatCard title="Have for other option" data={dashboardData.stats.completedDelivery} icon="✅" />
-        <StatCard title="Today's Delivery" data={dashboardData.stats.pendingDelivery} icon="⏳" />
-      </div>
-
-      {/* 2. Main Content Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <div className="lg:col-span-2 space-y-8">
-          <SalesAnalytics chartData={dashboardData.analytics} />
-          <RecentOrders orders={dashboardData.recentOrders} />
-        </div>
-        <div>
-          <TopProducts products={dashboardData.topProducts} />
-        </div>
+      {/* Main Split Section: Left Activity Table + Right Messenger Noticeboard */}
+      <div className="flex flex-col lg:flex-row gap-6">
+        <RecentOrdersWidget />
+        <PublicNotesWidget />
       </div>
     </div>
   );

@@ -5,7 +5,8 @@ import Dashboard from "../Dashboard/Dashboard";
 import NotFound from "../SharedPages/ErrorPage/NotFound";
 import CreateOrder from "../Order/CreateOrder/CreateOrder";
 import RequestedOrder from "../Order/RequestedOrder/RequestedOrder";
-import OrderList from "../Order/OrderList/OrderList/OrderList";
+import ViewOrderList from "../Order/ViewOrderList/ViewOrderList/ViewOrderList";
+
 import CreateNewOrder from "../Order/CreateOrder/CreateNewOrder";
 import PaymentRequest from "../Accounts/PaymentRequest/PaymentRequest";
 import CreatePayment from "../Accounts/CreatePayment/CreatePayment";
@@ -34,7 +35,7 @@ const router = createBrowserRouter([
       },
       {
         path: "order/order-list",
-        element: <OrderList></OrderList>,
+        element: <ViewOrderList></ViewOrderList>,
       },
       {
         path: "/accounts/create-payment",

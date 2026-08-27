@@ -1,4 +1,4 @@
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import RequestOrderTable from "../RequestedOrder/RequestOrderTable/RequestOrderTable";
 
@@ -10,7 +10,12 @@ const RequestOrder = () => {
     fetch("/data.json")
       .then((res) => res.json())
       .then((data) => {
-        setPaymentData(data);
+        // 🔹 ১. শুধু Pending/Unapproved অর্ডারগুলো ফিল্টার করে রাখা
+        const pendingOrders = Array.isArray(data)
+          ? data.filter((item) => item.status !== "Approved")
+          : data;
+
+        setPaymentData(pendingOrders);
         setLoading(false);
       })
       .catch((err) => {
@@ -18,6 +23,13 @@ const RequestOrder = () => {
         setLoading(false);
       });
   }, []);
+
+  // 🔹 ২. Approve করার সাথে সাথে স্টেট থেকে সরিয়ে ফেলার হ্যান্ডলার
+  const handleApproveStatus = (approvedOrderId) => {
+    setPaymentData((prevData) =>
+      prevData ? prevData.filter((item) => item.id !== approvedOrderId) : []
+    );
+  };
 
   return (
     <div className="min-h-screen bg-slate-50 p-4 md:p-8">
@@ -34,19 +46,18 @@ const RequestOrder = () => {
           </div>
 
           <div className="flex gap-5">
-            {/* Create Order Link */}
-          <Link
-            to="/order/create-order"
-            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2.5 rounded-xl font-bold text-xs transition shadow-sm"
-          >
-            + Create Order
-          </Link>
-          <Link
-            to="/order/order-list"
-            className="bg-gray-500 hover:bg-blue-700 text-white px-4 py-2.5 rounded-xl font-bold text-xs transition shadow-sm"
-          >
-            View Order List
-          </Link>
+            <Link
+              to="/order/create-order"
+              className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2.5 rounded-xl font-bold text-xs transition shadow-sm"
+            >
+              + Create Order
+            </Link>
+            <Link
+              to="/order/order-list"
+              className="bg-gray-500 hover:bg-blue-700 text-white px-4 py-2.5 rounded-xl font-bold text-xs transition shadow-sm"
+            >
+              View Order List
+            </Link>
           </div>
         </div>
 
@@ -56,7 +67,10 @@ const RequestOrder = () => {
             Loading order database...
           </div>
         ) : (
-          <RequestOrderTable paymentData={paymentData} />
+          <RequestOrderTable
+            paymentData={paymentData}
+            onApproveStatus={handleApproveStatus} // 🔹 Prop হিসেবে পাঠানো হলো
+          />
         )}
       </div>
     </div>

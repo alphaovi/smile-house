@@ -51,7 +51,7 @@ const SideNavbar = () => {
         {
           name: "Order List",
           icon: <List className="size-4 shrink-0" />,
-          link: "/order/list",
+          link: "/order/order-list",
         },
         {
           name: "Deleted Orders",

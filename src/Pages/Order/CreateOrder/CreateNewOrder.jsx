@@ -1,11 +1,10 @@
-import  { useState } from "react";
+import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import OrderPageOne from "./OrderPageOne";
 import OrderPageTwo from "./OrderPageTwo";
 import OrderPageThree from "./OrderPageThree";
-
-
+import { Link } from "react-router";
 
 // --- DEMO DATA ---
 const demoClinics = [
@@ -15,7 +14,7 @@ const demoClinics = [
     name: "Apex Dental Clinic, Dhanmondi",
     addresses: [
       "House 12, Road 5, Dhanmondi, Dhaka",
-      "Branch 2: House 45, Road 8, Dhanmondi, Dhaka"
+      "Branch 2: House 45, Road 8, Dhanmondi, Dhaka",
     ],
   },
   {
@@ -32,8 +31,19 @@ const demoClinics = [
   },
 ];
 
-const workGroups = ["Prosthodontics", "Orthodontics", "Implantology", "Restorative"];
-const workTypes = ["Zirconia Crown", "PFM Crown", "Clear Aligners", "Acrylic Denture", "Night Guard"];
+const workGroups = [
+  "Prosthodontics",
+  "Orthodontics",
+  "Implantology",
+  "Restorative",
+];
+const workTypes = [
+  "Zirconia Crown",
+  "PFM Crown",
+  "Clear Aligners",
+  "Acrylic Denture",
+  "Night Guard",
+];
 
 const shadeData = {
   VITA: ["A1", "A2", "A3", "B1", "B2", "C1"],
@@ -50,7 +60,9 @@ const CreateNewOrder = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
   // Page 1 States
-  const [orderDate, setOrderDate] = useState(new Date().toISOString().split("T")[0]);
+  const [orderDate, setOrderDate] = useState(
+    new Date().toISOString().split("T")[0],
+  );
   const [deliveryDate, setDeliveryDate] = useState("");
   const [selectedClinic, setSelectedClinic] = useState(null);
   const [selectedDoctor, setSelectedDoctor] = useState(null);
@@ -204,12 +216,28 @@ const CreateNewOrder = () => {
 
       <div className="border-b border-slate-100 pb-6 mb-8 flex justify-between items-center">
         <div>
-          <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">Create Order</h1>
+          <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">
+            Create Order
+          </h1>
           <p className="text-slate-500 text-sm mt-1">
             {currentPage === 1 && "Step 1: Basic Info, Clinic & Case Details"}
             {currentPage === 2 && "Step 2: Dental Chart, Cart & Pricing"}
-            {currentPage === 3 && "Step 3: Shade, Design, Photos & Instructions"}
+            {currentPage === 3 &&
+              "Step 3: Shade, Design, Photos & Instructions"}
           </p>
+        </div>
+        <div className="flex items-center gap-3">
+         <Link to="/order/requested-order"> {/* Primary Blue Button */}
+          <button className="bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-5 py-2 rounded-2xl shadow-sm transition-all active:scale-95 cursor-pointer">
+            Requested Order
+          </button></Link>
+
+          {/* Secondary Gray Button */}
+          <Link to="/order/order-list">
+            <button className="bg-slate-600 hover:bg-slate-700 text-white text-xs font-semibold px-5 py-2 rounded-2xl shadow-sm transition-all active:scale-95 cursor-pointer">
+              View Order List
+            </button>
+          </Link>
         </div>
         <div className="text-xs font-bold px-3 py-1 bg-blue-50 text-blue-600 rounded-full border border-blue-200">
           Page {currentPage} of 3
@@ -218,46 +246,70 @@ const CreateNewOrder = () => {
 
       {currentPage === 1 && (
         <OrderPageOne
-          orderDate={orderDate} setOrderDate={setOrderDate}
-          deliveryDate={deliveryDate} setDeliveryDate={setDeliveryDate}
-          selectedClinic={selectedClinic} handleClinicSelect={handleClinicSelect}
-          selectedDoctor={selectedDoctor} handleDoctorSelect={handleDoctorSelect}
-          demoClinics={demoClinics} caseId={caseId}
-          patientName={patientName} setPatientName={setPatientName}
-          patientAge={patientAge} setPatientAge={setPatientAge}
-          patientGender={patientGender} setPatientGender={setPatientGender}
-          shippingAddress={shippingAddress} setShippingAddress={setShippingAddress}
+          orderDate={orderDate}
+          setOrderDate={setOrderDate}
+          deliveryDate={deliveryDate}
+          setDeliveryDate={setDeliveryDate}
+          selectedClinic={selectedClinic}
+          handleClinicSelect={handleClinicSelect}
+          selectedDoctor={selectedDoctor}
+          handleDoctorSelect={handleDoctorSelect}
+          demoClinics={demoClinics}
+          caseId={caseId}
+          patientName={patientName}
+          setPatientName={setPatientName}
+          patientAge={patientAge}
+          setPatientAge={setPatientAge}
+          patientGender={patientGender}
+          setPatientGender={setPatientGender}
+          shippingAddress={shippingAddress}
+          setShippingAddress={setShippingAddress}
           handleNextToPage2={handleNextToPage2}
         />
       )}
 
       {currentPage === 2 && (
         <OrderPageTwo
-          workGroup={workGroup} setWorkGroup={setWorkGroup}
-          workType={workType} setWorkType={setWorkType}
-          workGroups={workGroups} workTypes={workTypes}
-          upperRightTeeth={upperRightTeeth} upperLeftTeeth={upperLeftTeeth}
-          lowerRightTeeth={lowerRightTeeth} lowerLeftTeeth={lowerLeftTeeth}
+          workGroup={workGroup}
+          setWorkGroup={setWorkGroup}
+          workType={workType}
+          setWorkType={setWorkType}
+          workGroups={workGroups}
+          workTypes={workTypes}
+          upperRightTeeth={upperRightTeeth}
+          upperLeftTeeth={upperLeftTeeth}
+          lowerRightTeeth={lowerRightTeeth}
+          lowerLeftTeeth={lowerLeftTeeth}
           handleToothClick={handleToothClick}
-          selectedJaw={selectedJaw} setSelectedJaw={setSelectedJaw}
-          selectedSize={selectedSize} setSelectedSize={setSelectedSize}
-          cartItems={cartItems} handleRemoveCartItem={handleRemoveCartItem}
-          additionalCharge={additionalCharge} setAdditionalCharge={setAdditionalCharge}
-          subTotal={subTotal} discount={discount} setDiscount={setDiscount}
-          grandTotal={grandTotal} setCurrentPage={setCurrentPage}
+          selectedJaw={selectedJaw}
+          setSelectedJaw={setSelectedJaw}
+          selectedSize={selectedSize}
+          setSelectedSize={setSelectedSize}
+          cartItems={cartItems}
+          handleRemoveCartItem={handleRemoveCartItem}
+          additionalCharge={additionalCharge}
+          setAdditionalCharge={setAdditionalCharge}
+          subTotal={subTotal}
+          discount={discount}
+          setDiscount={setDiscount}
+          grandTotal={grandTotal}
+          setCurrentPage={setCurrentPage}
           handleNextToPage3={handleNextToPage3}
         />
       )}
 
       {currentPage === 3 && (
         <OrderPageThree
-          shadeGroup={shadeGroup} setShadeGroup={setShadeGroup}
-          shadeType={shadeType} setShadeType={setShadeType}
+          shadeGroup={shadeGroup}
+          setShadeGroup={setShadeGroup}
+          shadeType={shadeType}
+          setShadeType={setShadeType}
           shadeData={shadeData}
           setDesignSelections={setDesignSelections}
           handleImageUpload={handleImageUpload}
           uploadedPhotos={uploadedPhotos}
-          comment={comment} setComment={setComment}
+          comment={comment}
+          setComment={setComment}
           setCurrentPage={setCurrentPage}
           handleSubmit={handleSubmit}
         />

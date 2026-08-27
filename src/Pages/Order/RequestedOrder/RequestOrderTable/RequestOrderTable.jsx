@@ -1,4 +1,4 @@
-import  { useState, useMemo } from "react";
+import { useState, useMemo } from "react";
 import RequestOrderViewModal from "../RequestOrderViewModal/RequestOrderViewModal";
 
 /**
@@ -50,28 +50,26 @@ const RequestOrderTable = ({ paymentData }) => {
     return Array.from(new Set(paymentData.doctors.map((d) => d.doctor_name).filter(Boolean)));
   }, [paymentData]);
 
-  // Handle status update and field updates from modal
-  const handleApproveStatus = (orderId, newStatus, updatedData) => {
-    setOrdersList((prev) =>
-      prev.map((ord) =>
-        ord.id === orderId
-          ? {
-              ...ord,
-              ...updatedData,
-              status: newStatus,
-            }
-          : ord
-      )
-    );
+  // 🔹 ১. Approve হয়ে গেলে সাথে সাথে লিস্ট থেকে সরিয়ে (Remove/Filter) ফেলা হবে
+  const handleApproveStatus = (orderId, newStatus) => {
+    if (newStatus === "Approved") {
+      setOrdersList((prev) => prev.filter((ord) => ord.id !== orderId));
+    } else {
+      setOrdersList((prev) =>
+        prev.map((ord) => (ord.id === orderId ? { ...ord, status: newStatus } : ord))
+      );
+    }
   };
 
-  // Filter table rows based on search input
+  // 🔹 ২. শুধুমাত্র "Pending" অর্ডার এবং সার্চ টার্ম অনুযায়ী ফিল্টার করা
   const filteredOrders = useMemo(() => {
-    return ordersList.filter((ord) =>
-      Object.values(ord).some((val) =>
-        String(val || "").toLowerCase().includes(searchTerm.toLowerCase())
-      )
-    );
+    return ordersList
+      .filter((ord) => ord.status === "Pending") // Approved বাদ যাবে
+      .filter((ord) =>
+        Object.values(ord).some((val) =>
+          String(val || "").toLowerCase().includes(searchTerm.toLowerCase())
+        )
+      );
   }, [ordersList, searchTerm]);
 
   return (
@@ -123,20 +121,14 @@ const RequestOrderTable = ({ paymentData }) => {
                   <td className="p-3 border-r">{row.deliveryDate}</td>
                   <td className="p-3 border-r font-bold text-slate-900">${row.amount}</td>
                   <td className="p-3 border-r">
-                    <span
-                      className={`px-2.5 py-1 rounded-full text-[10px] font-extrabold border ${
-                        row.status === "Approved"
-                          ? "bg-green-50 text-green-700 border-green-200"
-                          : "bg-amber-50 text-amber-700 border-amber-200"
-                      }`}
-                    >
+                    <span className="px-2.5 py-1 rounded-full text-[10px] font-extrabold border bg-amber-50 text-amber-700 border-amber-200">
                       {row.status}
                     </span>
                   </td>
                   <td className="p-3 text-center">
                     <button
                       onClick={() => setSelectedOrder(row)}
-                      className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded-lg font-bold transition shadow-sm"
+                      className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded-lg font-bold transition shadow-sm cursor-pointer"
                     >
                       👁 View
                     </button>
@@ -146,7 +138,7 @@ const RequestOrderTable = ({ paymentData }) => {
             ) : (
               <tr>
                 <td colSpan="10" className="p-6 text-center text-slate-400 font-medium">
-                  No orders match your criteria.
+                  No pending order requests available.
                 </td>
               </tr>
             )}

@@ -20,9 +20,11 @@ const RequestOrderViewModal = ({
 
   if (!order) return null;
 
+  // 1. Initial State from Order Props
   const [formData, setFormData] = useState({
     id: order?.id || "",
-    orderNo: order?.orderNo || "",
+    orderNo: order?.orderNo || order?.caseId || "CASE-9001",
+    caseId: order?.caseId || order?.orderNo || "CASE-9001",
     clientId: order?.clientId || "",
     clientName: order?.clientName || "",
     clinicName: order?.clinicName || "",
@@ -34,49 +36,78 @@ const RequestOrderViewModal = ({
     shippingAddress: order?.shippingAddress || "",
     workGroup: order?.workGroup || "Prosthodontics",
     workType: order?.workType || "Zirconia Crown",
-    additionalCharge: 0,
-    discount: 0,
-    shadeGroup: "VITA Classic",
-    shadeType: "A2",
-    comment: "Handle with precision.",
+    additionalCharge: order?.additionalCharge || 0,
+    discount: order?.discount || 0,
+    shadeGroup: order?.shadeGroup || "VITA Classic",
+    shadeType: order?.shadeType || "A2",
+    comment: order?.comment || "Handle with precision.",
   });
 
-  const [cartItems, setCartItems] = useState([
-    {
-      id: 1,
-      itemName: order?.workType || "Zirconia Crown",
-      description: "Tooth #16",
-      price: Number(order?.amount) || 150,
-    },
-  ]);
+  // 2. Initial Cart Items (Populated from Order or Mock Default)
+  const [cartItems, setCartItems] = useState(
+    order?.cartItems || [
+      {
+        id: "item-1",
+        itemName: order?.workType || "Zirconia Crown",
+        description: "Tooth #16",
+        price: Number(order?.amount) || 3000,
+        workGroup: order?.workGroup || "Prosthodontics",
+        workType: order?.workType || "Zirconia Crown",
+        selection: "16",
+      },
+    ]
+  );
 
   const [uploadedPhotos, setUploadedPhotos] = useState([]);
 
+  // Form Field Update Handler
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleAddToCart = (toothNum) => {
-    const newItem = {
-      id: Date.now(),
-      itemName: formData.workType || "Crown",
-      description: `Tooth #${toothNum}`,
-      price: 60,
-    };
+  // Safe Add to Cart Handler (Accepts full object or selection payload)
+  const handleAddToCart = (newItemOrSelection) => {
+    let newItem;
+
+    // If payload is already a structured item object from RequestOrderPageTwo
+    if (
+      typeof newItemOrSelection === "object" &&
+      newItemOrSelection !== null &&
+      newItemOrSelection.description
+    ) {
+      newItem = newItemOrSelection;
+    } else {
+      // Fallback if primitive value passed
+      const selectionStr = String(newItemOrSelection);
+      const isToothNum = /^\d+$/.test(selectionStr);
+
+      newItem = {
+        id: `cart-${Date.now()}-${Math.random().toString(36).substr(2, 4)}`,
+        itemName: formData.workType || "Zirconia Crown",
+        description: isToothNum ? `Tooth #${selectionStr}` : selectionStr,
+        price: selectionStr === "16" ? 3000 : 60,
+        workGroup: formData.workGroup,
+        workType: formData.workType,
+        selection: selectionStr,
+      };
+    }
+
     setCartItems((prev) => [...prev, newItem]);
   };
 
+  // Remove Cart Item Handler
   const handleRemoveCartItem = (id) => {
     setCartItems((prev) => prev.filter((item) => item.id !== id));
   };
 
+  // Image Upload Handler
   const handleImageUpload = (e) => {
     const files = Array.from(e.target.files);
     setUploadedPhotos((prev) => [...prev, ...files]);
   };
 
-  // 🔔 SweetAlert2 + Toastify Approval Handler
+  // 🔔 SweetAlert2 + Toastify Approval Handler (Fixed Issue)
   const handleApprove = () => {
     Swal.fire({
       title: "Are you sure?",
@@ -94,24 +125,36 @@ const RequestOrderViewModal = ({
       },
     }).then((result) => {
       if (result.isConfirmed) {
+        const subTotal = cartItems.reduce(
+          (acc, i) => acc + Number(i.price || 0),
+          0
+        );
         const totalAmount =
-          cartItems.reduce((acc, i) => acc + Number(i.price || 0), 0) +
+          subTotal +
           Number(formData.additionalCharge || 0) -
           Number(formData.discount || 0);
 
         if (onApproveStatus) {
           onApproveStatus(order.id, "Approved", {
             ...formData,
+            cartItems: cartItems,
             amount: totalAmount,
           });
         }
 
-        // 🚀 Toastify Alert Trigger
-        toast.success(`Order #${formData.orderNo} Approved Successfully!`);
+        // 1. আগে মডাল ক্লোজ করুন
+        onClose();
 
-        // Close modal after a micro-tick so toast renders smoothly
+        // 2. মডাল অনমাউন্ট হওয়ার পর Toast ট্রিগার করুন
         setTimeout(() => {
-          onClose();
+          toast.success(`Order #${formData.orderNo} Approved Successfully!`, {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+          });
         }, 100);
       }
     });

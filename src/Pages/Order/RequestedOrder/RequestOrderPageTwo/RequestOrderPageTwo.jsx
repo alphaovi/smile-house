@@ -1,54 +1,6 @@
-import React from "react";
-
-// =========================================================
-// DENTAL TEETH NUMBERS
-// =========================================================
-
-const upperRightTeeth = [18, 17, 16, 15, 14, 13, 12, 11];
-const upperLeftTeeth = [21, 22, 23, 24, 25, 26, 27, 28];
-
-const lowerRightTeeth = [48, 47, 46, 45, 44, 43, 42, 41];
-const lowerLeftTeeth = [31, 32, 33, 34, 35, 36, 37, 38];
-
-// =========================================================
-// JAW / SIZE OPTIONS
-// =========================================================
-
-const specialArchOptions = [
-  "Upper Jaw",
-  "Lower Jaw",
-  "Both Jaw",
-  "Small",
-  "Medium",
-  "Large",
-];
-
-// =========================================================
-// WORK GROUP
-// =========================================================
-
-const workGroupOptions = [
-  "Prosthodontics",
-  "Orthodontics",
-  "Implantology",
-  "Restorative",
-];
-
-// =========================================================
-// WORK TYPE
-// =========================================================
-
-const workTypeOptions = [
-  "Zirconia Crown",
-  "PFM Crown",
-  "Clear Aligners",
-  "Acrylic Denture",
-  "Night Guard",
-];
-
-// =========================================================
-// COMPONENT
-// =========================================================
+import { useState, useEffect } from "react";
+// Fake Data Import (পরে আসল API Fetch দিয়ে বদলে নিবে)
+import { mockMasterData } from "../../../../services/mockBackendData";
 
 const RequestOrderPageTwo = ({
   orderData = {},
@@ -59,10 +11,22 @@ const RequestOrderPageTwo = ({
   onPrev,
   onNext,
 }) => {
-  // =======================================================
-  // SUBTOTAL & GRAND TOTAL
-  // =======================================================
+  // ব্যাকএন্ড ডাটা স্টেট
+  const [masterData, setMasterData] = useState({
+    workGroups: [],
+    workTypes: [],
+    teethNumbers: { upperRight: [], upperLeft: [], lowerRight: [], lowerLeft: [] },
+    jawOptions: [],
+  });
 
+  // ১. ব্যাকএন্ড থেকে ডাটা লোড করার সিমুলেশন (API integration point)
+  useEffect(() => {
+    setMasterData(mockMasterData);
+  }, []);
+
+  // =======================================================
+  // PRICING CALCULATIONS
+  // =======================================================
   const subTotal = cartItems.reduce(
     (acc, item) => acc + (Number(item?.price) || 0),
     0
@@ -74,156 +38,33 @@ const RequestOrderPageTwo = ({
     Number(orderData.discount || 0);
 
   // =======================================================
-  // RECURSIVE PARSER (Extract Primitive Value)
+  // ITEM ADD HANDLER
   // =======================================================
-
-  const parseAnyValue = (input) => {
-    if (input === null || input === undefined) return "";
-
-    if (typeof input === "number") return input;
-
-    if (typeof input === "string") return input.trim();
-
-    if (typeof input === "object") {
-      // Check common keys directly
-      const keysToTry = [
-        "number",
-        "toothNumber",
-        "tooth",
-        "value",
-        "label",
-        "name",
-        "description",
-        "title",
-        "selected",
-      ];
-
-      for (const key of keysToTry) {
-        if (input[key] !== undefined && input[key] !== null) {
-          const extracted = parseAnyValue(input[key]);
-          if (extracted !== "") return extracted;
-        }
-      }
-
-      // If object has other properties, grab the first non-object value
-      for (const key in input) {
-        if (Object.prototype.hasOwnProperty.call(input, key)) {
-          const val = input[key];
-          if (typeof val === "string" || typeof val === "number") {
-            return String(val).trim();
-          }
-        }
-      }
-    }
-
-    return "";
-  };
-
-  // =======================================================
-  // CHECK IF VALUE IS A TOOTH NUMBER
-  // =======================================================
-
-  const isTooth = (selection) => {
-    const parsed = parseAnyValue(selection);
-
-    if (typeof parsed === "number") return true;
-
-    if (typeof parsed === "string") {
-      const clean = parsed.replace(/^Tooth\s*#/i, "").trim();
-      return /^\d+$/.test(clean);
-    }
-
-    return false;
-  };
-
-  // =======================================================
-  // GET DISPLAY VALUE FOR CART
-  // =======================================================
-
-  const getDisplayValue = (item) => {
-    // Try multiple possible sources from item object
-    const rawValue =
-      item?.description ??
-      item?.selection ??
-      item?.toothNumber ??
-      item?.tooth ??
-      item;
-
-    const parsed = parseAnyValue(rawValue);
-
-    if (parsed === "" || parsed === null || parsed === undefined) {
-      return "";
-    }
-
-    const strValue = String(parsed).trim();
-
-    // If it's already formatted as "Tooth #..."
-    if (/^Tooth\s*#/i.test(strValue)) {
-      return strValue;
-    }
-
-    // If it's purely numeric or single/double digits (Tooth)
-    if (/^\d+$/.test(strValue)) {
-      return `Tooth #${strValue}`;
-    }
-
-    // Jaw / Size / Text (e.g. "Upper Jaw", "Medium", "Prosthodontics - Zirconia Crown")
-    return strValue;
-  };
-
-  // =======================================================
-  // GET ITEM PRICE
-  // =======================================================
-
-  const getItemPrice = (selection) => {
-    const val = String(parseAnyValue(selection)).trim();
-
-    if (isTooth(selection)) return 50;
-
-    if (val === "Both Jaw") return 150;
-    if (val === "Upper Jaw" || val === "Lower Jaw") return 90;
-    if (["Small", "Medium", "Large"].includes(val)) return 50;
-
-    return 50;
-  };
-
-  // =======================================================
-  // ADD ITEM
-  // =======================================================
-
   const handleAddItem = (selection) => {
     if (!orderData.workGroup) {
-      alert("দয়া করে প্রথমে Work Group নির্বাচন করুন।");
+      alert("Please select Work Group first.");
       return;
     }
 
     if (!orderData.workType) {
-      alert("দয়া করে প্রথমে Work Type নির্বাচন করুন।");
+      alert("Please select Work Type first.");
       return;
     }
 
-    const parsedVal = parseAnyValue(selection);
+    const isToothNum = typeof selection === "number" || /^\d+$/.test(selection);
+    const description = isToothNum ? `Tooth #${selection}` : String(selection);
 
-    if (parsedVal === "") return;
-
-    const isToothNum = isTooth(selection);
-    const cleanNum = String(parsedVal).replace(/^Tooth\s*#/i, "").trim();
-
-    // Clean description format
-    const description = isToothNum
-      ? `Tooth #${cleanNum}`
-      : String(parsedVal);
-
-    const price = getItemPrice(selection);
+    let price = 60; 
+    if (selection === 16 || selection === "16") price = 3000;
 
     const newItem = {
-      id: Date.now() + Math.random(),
-      itemName: `${orderData.workGroup} - ${orderData.workType}`,
+      id: `cart-${Date.now()}-${Math.random().toString(36).substr(2, 4)}`,
+      itemName: orderData.workType,
       description: description,
       price: price,
       workGroup: orderData.workGroup,
       workType: orderData.workType,
-      selection: parsedVal,
+      selection: String(selection),
     };
 
     if (typeof onAddToCart === "function") {
@@ -231,68 +72,30 @@ const RequestOrderPageTwo = ({
     }
   };
 
-  // =======================================================
-  // TOOTH BUTTON
-  // =======================================================
-
-  const renderToothButton = (toothNumber) => {
-    return (
-      <button
-        key={toothNumber}
-        type="button"
-        onClick={() => handleAddItem(toothNumber)}
-        title={`Add Tooth #${toothNumber}`}
-        className="w-8 h-9 bg-emerald-100 hover:bg-emerald-600 border border-emerald-300 hover:border-emerald-600 rounded-md font-semibold text-emerald-900 hover:text-white transition flex flex-col items-center justify-center shadow-sm cursor-pointer"
-      >
-        <span className="text-[10px] leading-none opacity-50">🦷</span>
-        <span className="text-[11px] leading-none">{toothNumber}</span>
-      </button>
-    );
-  };
-
-  // =======================================================
-  // SUBMIT
-  // =======================================================
-
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (!orderData.workGroup) {
-      alert("দয়া করে Work Group নির্বাচন করুন।");
-      return;
-    }
-
-    if (!orderData.workType) {
-      alert("দয়া করে Work Type নির্বাচন করুন।");
-      return;
-    }
-
     if (typeof onNext === "function") {
       onNext(e);
     }
   };
 
-  // =======================================================
-  // JSX
-  // =======================================================
-
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 text-xs text-slate-700">
-      {/* WORK GROUP + WORK TYPE */}
+    <form onSubmit={handleSubmit} className="space-y-5 text-xs text-slate-700">
+      {/* WORK GROUP & WORK TYPE DROPDOWNS */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
-          <label className="block font-bold mb-1 text-slate-700 uppercase tracking-wide">
-            Work Group <span className="text-red-500">*</span>
+          <label className="block font-bold mb-1.5 text-slate-700 uppercase tracking-wide text-[11px]">
+            WORK GROUP <span className="text-red-500">*</span>
           </label>
           <select
             name="workGroup"
             value={orderData.workGroup || ""}
             onChange={onChange}
             required
-            className="w-full border border-slate-300 rounded-lg p-2.5 bg-slate-50/50 focus:bg-white focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none transition font-medium text-slate-700"
+            className="w-full border border-slate-300 rounded-lg p-2.5 bg-white focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none transition font-medium text-slate-700 cursor-pointer"
           >
             <option value="">-- Select Work Group --</option>
-            {workGroupOptions.map((group) => (
+            {masterData.workGroups.map((group) => (
               <option key={group} value={group}>
                 {group}
               </option>
@@ -301,18 +104,18 @@ const RequestOrderPageTwo = ({
         </div>
 
         <div>
-          <label className="block font-bold mb-1 text-slate-700 uppercase tracking-wide">
-            Work Type <span className="text-red-500">*</span>
+          <label className="block font-bold mb-1.5 text-slate-700 uppercase tracking-wide text-[11px]">
+            WORK TYPE <span className="text-red-500">*</span>
           </label>
           <select
             name="workType"
             value={orderData.workType || ""}
             onChange={onChange}
             required
-            className="w-full border border-slate-300 rounded-lg p-2.5 bg-slate-50/50 focus:bg-white focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none transition font-medium text-slate-700"
+            className="w-full border border-slate-300 rounded-lg p-2.5 bg-white focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 outline-none transition font-medium text-slate-700 cursor-pointer"
           >
             <option value="">-- Select Work Type --</option>
-            {workTypeOptions.map((type) => (
+            {masterData.workTypes.map((type) => (
               <option key={type} value={type}>
                 {type}
               </option>
@@ -321,35 +124,81 @@ const RequestOrderPageTwo = ({
         </div>
       </div>
 
-      {/* DENTAL CHART */}
-      <div className="border border-emerald-200/60 rounded-2xl p-4 bg-emerald-50/20">
-        <p className="font-bold text-emerald-800 mb-3 text-xs uppercase tracking-wide">
-          Select Tooth (Click to Add Item to Cart)
+      {/* DENTAL CHART CONTAINER */}
+      <div className="border border-emerald-300/70 rounded-2xl p-4 bg-emerald-50/20">
+        <p className="font-bold text-emerald-800 mb-3 text-[11px] uppercase tracking-wide">
+          SELECT TOOTH (CLICK TO ADD ITEM TO CART)
         </p>
 
-        {/* TEETH */}
-        <div className="bg-emerald-100/50 border border-emerald-200/50 p-3 rounded-xl mb-3">
-          <div className="flex justify-center flex-wrap gap-1.5 mb-2">
-            {upperRightTeeth.map((num) => renderToothButton(num))}
-            <div className="border-r-2 border-emerald-300/80 mx-1 h-8 self-center" />
-            {upperLeftTeeth.map((num) => renderToothButton(num))}
+        {/* TEETH GRID */}
+        <div className="bg-emerald-50/60 border border-emerald-200/60 p-4 rounded-xl mb-3">
+          {/* UPPER TEETH */}
+          <div className="flex justify-center items-center gap-1.5 mb-2">
+            {masterData.teethNumbers.upperRight.map((num) => (
+              <button
+                key={num}
+                type="button"
+                onClick={() => handleAddItem(num)}
+                className="w-8 h-9 bg-emerald-100/60 hover:bg-emerald-600 border border-emerald-300/80 hover:border-emerald-600 rounded-md font-semibold text-emerald-900 hover:text-white transition flex flex-col items-center justify-center cursor-pointer shadow-2xs"
+              >
+                <span className="text-[10px] opacity-40 leading-none mb-0.5">🦷</span>
+                <span className="text-[10px] font-bold leading-none">{num}</span>
+              </button>
+            ))}
+
+            <div className="border-r border-emerald-400 mx-1.5 h-8 opacity-60" />
+
+            {masterData.teethNumbers.upperLeft.map((num) => (
+              <button
+                key={num}
+                type="button"
+                onClick={() => handleAddItem(num)}
+                className="w-8 h-9 bg-emerald-100/60 hover:bg-emerald-600 border border-emerald-300/80 hover:border-emerald-600 rounded-md font-semibold text-emerald-900 hover:text-white transition flex flex-col items-center justify-center cursor-pointer shadow-2xs"
+              >
+                <span className="text-[10px] opacity-40 leading-none mb-0.5">🦷</span>
+                <span className="text-[10px] font-bold leading-none">{num}</span>
+              </button>
+            ))}
           </div>
 
-          <div className="flex justify-center flex-wrap gap-1.5">
-            {lowerRightTeeth.map((num) => renderToothButton(num))}
-            <div className="border-r-2 border-emerald-300/80 mx-1 h-8 self-center" />
-            {lowerLeftTeeth.map((num) => renderToothButton(num))}
+          {/* LOWER TEETH */}
+          <div className="flex justify-center items-center gap-1.5">
+            {masterData.teethNumbers.lowerRight.map((num) => (
+              <button
+                key={num}
+                type="button"
+                onClick={() => handleAddItem(num)}
+                className="w-8 h-9 bg-emerald-100/60 hover:bg-emerald-600 border border-emerald-300/80 hover:border-emerald-600 rounded-md font-semibold text-emerald-900 hover:text-white transition flex flex-col items-center justify-center cursor-pointer shadow-2xs"
+              >
+                <span className="text-[10px] opacity-40 leading-none mb-0.5">🦷</span>
+                <span className="text-[10px] font-bold leading-none">{num}</span>
+              </button>
+            ))}
+
+            <div className="border-r border-emerald-400 mx-1.5 h-8 opacity-60" />
+
+            {masterData.teethNumbers.lowerLeft.map((num) => (
+              <button
+                key={num}
+                type="button"
+                onClick={() => handleAddItem(num)}
+                className="w-8 h-9 bg-emerald-100/60 hover:bg-emerald-600 border border-emerald-300/80 hover:border-emerald-600 rounded-md font-semibold text-emerald-900 hover:text-white transition flex flex-col items-center justify-center cursor-pointer shadow-2xs"
+              >
+                <span className="text-[10px] opacity-40 leading-none mb-0.5">🦷</span>
+                <span className="text-[10px] font-bold leading-none">{num}</span>
+              </button>
+            ))}
           </div>
         </div>
 
-        {/* JAW / SIZE */}
+        {/* JAW / SIZE BUTTONS */}
         <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
-          {specialArchOptions.map((option) => (
+          {masterData.jawOptions.map((option) => (
             <button
               key={option}
               type="button"
               onClick={() => handleAddItem(option)}
-              className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 px-3 rounded-lg text-xs transition shadow-sm cursor-pointer text-center"
+              className="bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white font-bold py-2 px-3 rounded-lg text-xs transition shadow-2xs cursor-pointer text-center"
             >
               {option}
             </button>
@@ -357,73 +206,62 @@ const RequestOrderPageTwo = ({
         </div>
       </div>
 
-      {/* CART TABLE */}
+      {/* SELECTED ITEMS CART TABLE */}
       <div>
-        <h4 className="font-bold text-slate-800 mb-2">Selected Items Cart</h4>
+        <h4 className="font-bold text-slate-800 mb-2.5 text-xs">
+          Selected Items Cart
+        </h4>
 
-        <div className="border border-slate-200 rounded-xl overflow-hidden bg-white shadow-sm">
+        <div className="border border-slate-200 rounded-xl overflow-hidden bg-white shadow-2xs">
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
-              <thead className="bg-slate-100 border-b border-slate-200">
+              <thead className="bg-slate-50 border-b border-slate-200 text-slate-700 text-[11px]">
                 <tr>
-                  <th className="p-2.5 font-bold text-slate-700">Item Name</th>
-                  <th className="p-2.5 font-bold text-slate-700">
-                    Tooth Description
-                  </th>
-                  <th className="p-2.5 font-bold text-slate-700">Price ($)</th>
-                  <th className="p-2.5 text-center font-bold text-slate-700">
-                    Action
-                  </th>
+                  <th className="p-3 font-bold">Item Name</th>
+                  <th className="p-3 font-bold">Tooth Description</th>
+                  <th className="p-3 font-bold">Price ($)</th>
+                  <th className="p-3 text-right font-bold">Action</th>
                 </tr>
               </thead>
 
-              <tbody>
+              <tbody className="divide-y divide-slate-100">
                 {cartItems.length > 0 ? (
-                  cartItems.map((item) => {
-                    const safeDescription = getDisplayValue(item);
-                    const safeItemName =
-                      typeof item?.itemName === "string"
-                        ? item.itemName
-                        : getDisplayValue(item?.itemName);
-
-                    return (
-                      <tr
-                        key={item.id}
-                        className="border-b border-slate-200 hover:bg-slate-50 transition"
-                      >
-                        <td className="p-2.5 font-semibold text-slate-800">
-                          {safeItemName}
-                        </td>
-                        <td className="p-2.5 font-medium text-slate-600">
-                          {safeDescription}
-                        </td>
-                        <td className="p-2.5 font-bold text-emerald-600">
-                          ${Number(item?.price) || 0}
-                        </td>
-                        <td className="p-2.5 text-center">
-                          <button
-                            type="button"
-                            onClick={() => {
-                              if (typeof onRemoveCartItem === "function") {
-                                onRemoveCartItem(item.id);
-                              }
-                            }}
-                            className="text-red-500 hover:text-red-700 font-bold transition cursor-pointer"
-                          >
-                            ✕ Remove
-                          </button>
-                        </td>
-                      </tr>
-                    );
-                  })
+                  cartItems.map((item) => (
+                    <tr
+                      key={item.id}
+                      className="hover:bg-slate-50/80 transition"
+                    >
+                      <td className="p-3 font-medium text-slate-800">
+                        {item.itemName || item.workType}
+                      </td>
+                      <td className="p-3 text-slate-600 font-medium">
+                        {item.description}
+                      </td>
+                      <td className="p-3 font-bold text-emerald-600">
+                        ${item.price}
+                      </td>
+                      <td className="p-3 text-right">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            if (typeof onRemoveCartItem === "function") {
+                              onRemoveCartItem(item.id);
+                            }
+                          }}
+                          className="text-red-500 hover:text-red-700 font-semibold transition cursor-pointer text-[11px]"
+                        >
+                          ✕ Remove
+                        </button>
+                      </td>
+                    </tr>
+                  ))
                 ) : (
                   <tr>
                     <td
                       colSpan="4"
                       className="p-4 text-center text-slate-400 italic"
                     >
-                      No teeth or jaw items added yet. Click on tooth number or
-                      jaw option above.
+                      No items selected yet. Click on any tooth or jaw option above to add.
                     </td>
                   </tr>
                 )}
@@ -433,66 +271,66 @@ const RequestOrderPageTwo = ({
         </div>
       </div>
 
-      {/* PRICING */}
+      {/* PRICE BREAKDOWN INPUTS */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 border-t pt-3">
         <div>
-          <label className="block text-slate-600 font-semibold mb-1">
+          <label className="block text-slate-600 font-bold mb-1 text-[11px]">
             Subtotal ($)
           </label>
           <input
             type="number"
             value={subTotal}
             readOnly
-            className="w-full border border-slate-300 rounded-lg p-2 bg-slate-100 font-bold text-slate-700 outline-none"
+            className="w-full border border-slate-200 rounded-lg p-2 bg-slate-100 font-bold text-slate-700 outline-none"
           />
         </div>
 
         <div>
-          <label className="block text-slate-600 font-semibold mb-1">
+          <label className="block text-slate-600 font-bold mb-1 text-[11px]">
             Additional Charge ($)
           </label>
           <input
             type="number"
             name="additionalCharge"
-            value={orderData.additionalCharge || 0}
+            value={orderData.additionalCharge ?? 0}
             onChange={onChange}
             className="w-full border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-blue-500/20 outline-none font-medium"
           />
         </div>
 
         <div>
-          <label className="block text-slate-600 font-semibold mb-1">
+          <label className="block text-slate-600 font-bold mb-1 text-[11px]">
             Discount ($)
           </label>
           <input
             type="number"
             name="discount"
-            value={orderData.discount || 0}
+            value={orderData.discount ?? 0}
             onChange={onChange}
             className="w-full border border-slate-300 rounded-lg p-2 focus:ring-2 focus:ring-blue-500/20 outline-none font-medium"
           />
         </div>
       </div>
 
-      {/* GRAND TOTAL */}
-      <div className="flex justify-between items-center text-sm font-extrabold text-blue-700 bg-blue-50 p-3 rounded-xl border border-blue-200">
+      {/* GRAND TOTAL DISPLAY */}
+      <div className="flex justify-between items-center text-sm font-bold text-blue-800 bg-blue-50/80 p-3.5 rounded-xl border border-blue-200/80">
         <span>Grand Total:</span>
-        <span className="text-base">${grandTotal}</span>
+        <span className="text-lg font-extrabold">${grandTotal}</span>
       </div>
 
-      {/* FOOTER */}
-      <div className="flex justify-between pt-4 border-t">
+      {/* BUTTON FOOTER */}
+      <div className="flex justify-between pt-3 border-t">
         <button
           type="button"
           onClick={onPrev}
-          className="bg-slate-200 hover:bg-slate-300 text-slate-700 px-5 py-2.5 rounded-xl font-bold transition cursor-pointer"
+          className="bg-slate-200 hover:bg-slate-300 text-slate-700 px-4 py-2 rounded-lg font-bold transition cursor-pointer flex items-center gap-1.5"
         >
-          ⬅ Step 1
+          <span>⬅</span> Step 1
         </button>
 
         <button
           type="submit"
-          className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-xl font-bold transition cursor-pointer"
+          className="bg-blue-600 hover:bg-blue-700 text-white px-5 py-2 rounded-lg font-bold transition cursor-pointer shadow-sm"
         >
           Next: Shade & Photos ➔
         </button>

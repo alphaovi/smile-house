@@ -16,6 +16,7 @@ const OrderPageOne = ({
     <form onSubmit={handleNextToPage2} className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
+          
           <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">Order Date *</label>
           <input
             type="date"
