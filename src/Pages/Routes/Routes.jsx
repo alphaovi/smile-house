@@ -11,6 +11,7 @@ import CreateNewOrder from "../Order/CreateOrder/CreateNewOrder";
 import PaymentRequest from "../Accounts/PaymentRequest/PaymentRequest";
 import CreatePayment from "../Accounts/CreatePayment/CreatePayment";
 import ViewPayment from "../Accounts/ViewPayment/ViewPayment/ViewPayment";
+import AddExpense from "../Accounts/Expense/AddExpense/AddExpense";
 
 const router = createBrowserRouter([
   {
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
       {
         path: "/accounts/view-payment",
         element: <ViewPayment></ViewPayment>,
+      },
+      {
+        path: "/accounts/expense/add-expenses",
+        element: <AddExpense></AddExpense>,
       },
       // {
       //     path: "order/create-order",

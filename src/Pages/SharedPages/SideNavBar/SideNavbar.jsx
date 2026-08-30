@@ -12,6 +12,10 @@ import {
   Menu,
   X,
   Receipt,
+  TrendingDown,
+  Briefcase,
+  Scale,
+  PieChart,
 } from "lucide-react";
 import { Outlet, NavLink } from "react-router";
 
@@ -22,9 +26,7 @@ const SideNavbar = () => {
   const handleMouseLeave = () => {
     if (sidebarRef.current) {
       const openDetails = sidebarRef.current.querySelectorAll("details[open]");
-      openDetails.forEach((detail) => {
-        detail.removeAttribute("open");
-      });
+      openDetails.forEach((detail) => detail.removeAttribute("open"));
     }
   };
 
@@ -65,90 +67,156 @@ const SideNavbar = () => {
       icon: <Users className="size-5 shrink-0" />,
       children: [
         {
-          name: "Payment Request",
+          name: "Income",
           icon: <CircleDollarSign className="size-4 shrink-0" />,
-          link: "/accounts/payment-request",
+          children: [
+            {
+              name: "Payment Request",
+              icon: <CircleDollarSign className="size-4 shrink-0" />,
+              link: "/accounts/payment-request",
+            },
+            {
+              name: "Create Payment",
+              icon: <CreditCard className="size-4 shrink-0" />,
+              link: "/accounts/create-payment",
+            },
+            {
+              name: "View Payment",
+              icon: <Receipt className="size-4 shrink-0" />,
+              link: "/accounts/view-payment",
+            },
+            {
+              name: "Other Income",
+              icon: <ReceiptText className="size-4 shrink-0" />,
+              link: "/accounts/other-income",
+            },
+          ],
         },
         {
-          name: "Create Payment",
-          icon: <CreditCard className="size-4 shrink-0" />,
-          link: "/accounts/create-payment",
+          name: "Expense",
+          icon: <TrendingDown className="size-4 shrink-0" />,
+          children: [
+            {
+              name: "Add Expense",
+              icon: <CreditCard className="size-4 shrink-0" />,
+              link: "/accounts/expense/add-expenses",
+            },
+            {
+              name: "Expense List",
+              icon: <List className="size-4 shrink-0" />,
+              link: "/accounts/expense/list",
+            },
+          ],
         },
         {
-          name: "View Payment",
-          icon: <Receipt className="size-4 shrink-0" />,
-          link: "/accounts/view-payment",
+          name: "Asset",
+          icon: <Briefcase className="size-4 shrink-0" />,
+          children: [
+            {
+              name: "Asset List",
+              icon: <List className="size-4 shrink-0" />,
+              link: "/accounts/asset/list",
+            },
+          ],
         },
         {
-          name: "Voucher",
-          icon: <ReceiptText className="size-4 shrink-0" />,
-          link: "/accounts/voucher",
+          name: "Liability",
+          icon: <Scale className="size-4 shrink-0" />,
+          children: [
+            {
+              name: "Liability List",
+              icon: <List className="size-4 shrink-0" />,
+              link: "/accounts/liability/list",
+            },
+          ],
+        },
+        {
+          name: "Equity",
+          icon: <PieChart className="size-4 shrink-0" />,
+          children: [
+            {
+              name: "Equity Summary",
+              icon: <List className="size-4 shrink-0" />,
+              link: "/accounts/equity/summary",
+            },
+          ],
         },
       ],
     },
   ];
 
+  // Dynamic Multi-level Recursive Menu Renderer
+  const renderNavList = (items, isMobile = false) => {
+    return items.map((item, index) => (
+      <li key={index}>
+        {item.children ? (
+          <details
+            className={
+              !isMobile
+                ? "pointer-events-none group-hover:pointer-events-auto"
+                : ""
+            }
+          >
+            <summary className="flex items-center justify-between gap-4 py-2.5 hover:bg-base-300 rounded-lg cursor-pointer">
+              <div className="flex items-center gap-3">
+                {item.icon}
+                <span
+                  className={`${!isMobile ? "opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap" : ""} font-medium`}
+                >
+                  {item.name}
+                </span>
+              </div>
+            </summary>
+            <ul
+              className={`ml-3 mt-1 border-l-2 border-base-300 pl-2 space-y-1 ${!isMobile ? "opacity-0 group-hover:opacity-100 transition-opacity duration-200" : ""}`}
+            >
+              {renderNavList(item.children, isMobile)}
+            </ul>
+          </details>
+        ) : (
+          <NavLink
+            to={item.link || "#"}
+            onClick={() => isMobile && setIsMobileOpen(false)}
+            className="flex items-center gap-3 py-2 text-sm text-base-content/80 hover:text-primary rounded-md whitespace-nowrap hover:bg-base-100"
+          >
+            {item.icon}
+            <span
+              className={
+                !isMobile
+                  ? "opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                  : ""
+              }
+            >
+              {item.name}
+            </span>
+          </NavLink>
+        )}
+      </li>
+    ));
+  };
+
   return (
     <div className="flex h-screen overflow-hidden bg-base-100">
-      {/* ---------------- Desktop Sidebar (Unchanged) ---------------- */}
+      {/* ---------------- Desktop Sidebar ---------------- */}
       <aside
         ref={sidebarRef}
         onMouseLeave={handleMouseLeave}
         className="hidden md:flex group z-20 flex-col bg-base-200 w-16 hover:w-64 transition-all duration-300 ease-in-out shadow-lg overflow-x-hidden"
       >
         <ul className="menu w-full p-2 space-y-1 grow pt-10 primaryColor">
-          {navItems.map((item, index) => (
-            <li key={index}>
-              {item.children ? (
-                <details className="pointer-events-none group-hover:pointer-events-auto">
-                  <summary className="flex items-center justify-between gap-4 py-3 hover:bg-base-300 rounded-lg cursor-pointer">
-                    <div className="flex items-center gap-4">
-                      {item.icon}
-                      <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap font-medium">
-                        {item.name}
-                      </span>
-                    </div>
-                  </summary>
-
-                  <ul className="ml-4 mt-1 border-l-2 border-base-300 pl-2 space-y-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                    {item.children.map((child, childIndex) => (
-                      <li key={childIndex}>
-                        <NavLink
-                          to={child.link || "#"}
-                          className="flex items-center gap-3 py-2 text-sm text-base-content/80 hover:text-primary rounded-md whitespace-nowrap hover:bg-white"
-                        >
-                          {child.icon && child.icon}
-                          <span>{child.name}</span>
-                        </NavLink>
-                      </li>
-                    ))}
-                  </ul>
-                </details>
-              ) : (
-                <NavLink
-                  to={item.link}
-                  className="flex items-center gap-4 py-3 hover:bg-base-300 rounded-lg"
-                >
-                  {item.icon}
-                  <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap font-medium">
-                    {item.name}
-                  </span>
-                </NavLink>
-              )}
-            </li>
-          ))}
+          {renderNavList(navItems, false)}
         </ul>
       </aside>
 
-      {/* ---------------- Mobile Sidebar Overlay ---------------- */}
+      {/* ---------------- Mobile Overlay ---------------- */}
       {isMobileOpen && (
         <div
           onClick={() => setIsMobileOpen(false)}
-          className="fixed inset-0 z-40 bg-black/50 md:hidden"
+          className="fixed inset-0 z-40 bg-black/50 md:hidden backdrop-blur-sm transition-opacity"
         />
       )}
 
-      {/* ---------------- Mobile Drawer Sidebar ---------------- */}
+      {/* ---------------- Mobile Sidebar Drawer ---------------- */}
       <aside
         className={`fixed top-0 left-0 z-50 h-full w-64 bg-base-200 shadow-2xl transition-transform duration-300 ease-in-out md:hidden flex flex-col ${
           isMobileOpen ? "translate-x-0" : "-translate-x-full"
@@ -158,58 +226,21 @@ const SideNavbar = () => {
           <span className="font-bold text-lg">Smile House</span>
           <button
             onClick={() => setIsMobileOpen(false)}
-            className="p-1 rounded-md hover:bg-base-300"
+            className="p-1 rounded-md hover:bg-base-300 transition-colors"
           >
             <X className="size-6" />
           </button>
         </div>
 
         <ul className="menu w-full p-4 space-y-1 grow overflow-y-auto primaryColor">
-          {navItems.map((item, index) => (
-            <li key={index}>
-              {item.children ? (
-                <details>
-                  <summary className="flex items-center justify-between gap-4 py-3 hover:bg-base-300 rounded-lg cursor-pointer">
-                    <div className="flex items-center gap-4">
-                      {item.icon}
-                      <span className="font-medium">{item.name}</span>
-                    </div>
-                  </summary>
-
-                  <ul className="ml-4 mt-1 border-l-2 border-base-300 pl-2 space-y-1">
-                    {item.children.map((child, childIndex) => (
-                      <li key={childIndex}>
-                        <NavLink
-                          to={child.link || "#"}
-                          onClick={() => setIsMobileOpen(false)}
-                          className="flex items-center gap-3 py-2 text-sm text-base-content/80 hover:text-primary rounded-md"
-                        >
-                          {child.icon && child.icon}
-                          <span>{child.name}</span>
-                        </NavLink>
-                      </li>
-                    ))}
-                  </ul>
-                </details>
-              ) : (
-                <NavLink
-                  to={item.link}
-                  onClick={() => setIsMobileOpen(false)}
-                  className="flex items-center gap-4 py-3 hover:bg-base-300 rounded-lg"
-                >
-                  {item.icon}
-                  <span className="font-medium">{item.name}</span>
-                </NavLink>
-              )}
-            </li>
-          ))}
+          {renderNavList(navItems, true)}
         </ul>
       </aside>
 
       {/* ---------------- Main Content Area ---------------- */}
       <div className="flex flex-1 flex-col overflow-y-auto">
         <nav className="navbar h-16 w-full bg-base-300 border-b border-base-200 px-4 secondaryColor flex items-center gap-3">
-          {/* Mobile Menu Button (Only visible on mobile/tablet) */}
+          {/* Mobile Menu Toggle Button */}
           <button
             onClick={() => setIsMobileOpen(true)}
             className="md:hidden p-2 rounded-lg hover:bg-base-200 transition-colors"

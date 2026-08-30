@@ -5,7 +5,6 @@ import OrderPageOne from "./OrderPageOne";
 import OrderPageTwo from "./OrderPageTwo";
 import OrderPageThree from "./OrderPageThree";
 import { Link } from "react-router";
-
 // --- DEMO DATA ---
 const demoClinics = [
   {
