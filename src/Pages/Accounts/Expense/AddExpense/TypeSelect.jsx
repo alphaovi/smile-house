@@ -1,5 +1,8 @@
-
-import { inputGroupStyle, inputStyle, labelStyle } from "./styles";
+import {
+  inputGroupStyle,
+  inputStyle,
+  labelStyle,
+} from "../../../../services/styles";
 
 const TypeSelect = ({ options, selectedType, onSelectType, isDisabled }) => (
   <div style={inputGroupStyle}>

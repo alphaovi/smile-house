@@ -12,6 +12,7 @@ import PaymentRequest from "../Accounts/PaymentRequest/PaymentRequest";
 import CreatePayment from "../Accounts/CreatePayment/CreatePayment";
 import ViewPayment from "../Accounts/ViewPayment/ViewPayment/ViewPayment";
 import AddExpense from "../Accounts/Expense/AddExpense/AddExpense";
+import ExpenseList from "../Accounts/Expense/ExpenseList/ExpenseList";
 
 const router = createBrowserRouter([
   {
@@ -53,6 +54,10 @@ const router = createBrowserRouter([
       {
         path: "/accounts/expense/add-expenses",
         element: <AddExpense></AddExpense>,
+      },
+      {
+        path: "/accounts/expense/expense-list",
+        element: <ExpenseList></ExpenseList>,
       },
       // {
       //     path: "order/create-order",

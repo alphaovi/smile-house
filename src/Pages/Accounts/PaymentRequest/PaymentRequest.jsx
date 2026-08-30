@@ -1,7 +1,7 @@
 import  { useState, useEffect } from "react";
 import PaymentTableRow from "./PaymentTableRow";
 import ReceiptModal from "./ReceiptModal";
-import { styles } from "../../../utilies/PaymentRequest/PaymentStyles";
+import { styles } from "../../../utilies/PaymentStyles";
 
 // Notification Packages
 import Swal from "sweetalert2";

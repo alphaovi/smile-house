@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
-import { expenseCategories, fakeBankList } from "./expenseData";
+import { expenseCategories, fakeBankList } from "../../../../services/expenseData";
 import DateInput from "./DateInput";
 import GroupSelect from "./GroupSelect";
 import TypeSelect from "./TypeSelect";
@@ -15,7 +15,7 @@ import {
   pageWrapperStyle,
   rowStyle,
   submitButtonStyle,
-} from "./styles";
+} from "../../../../services/styles";
 
 const AddExpense = () => {
   const initialFormState = {
@@ -75,7 +75,9 @@ const AddExpense = () => {
     });
   };
 
-  const availableTypes = formData.group ? expenseCategories[formData.group] : [];
+  const availableTypes = formData.group
+    ? expenseCategories[formData.group]
+    : [];
 
   return (
     <div style={pageWrapperStyle}>
@@ -105,7 +107,9 @@ const AddExpense = () => {
             <TypeSelect
               options={availableTypes}
               selectedType={formData.type}
-              onSelectType={(type) => setFormData((prev) => ({ ...prev, type }))}
+              onSelectType={(type) =>
+                setFormData((prev) => ({ ...prev, type }))
+              }
               isDisabled={!formData.group}
             />
           </div>

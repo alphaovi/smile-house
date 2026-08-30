@@ -1,5 +1,9 @@
-
-import { currencySymbolStyle, inputGroupStyle, inputStyle, labelStyle } from "./styles";
+import {
+  currencySymbolStyle,
+  inputGroupStyle,
+  inputStyle,
+  labelStyle,
+} from "../../../../services/styles";
 
 const AmountInput = ({ value, onChange }) => (
   <div style={inputGroupStyle}>

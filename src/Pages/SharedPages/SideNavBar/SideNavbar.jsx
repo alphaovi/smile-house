@@ -104,7 +104,7 @@ const SideNavbar = () => {
             {
               name: "Expense List",
               icon: <List className="size-4 shrink-0" />,
-              link: "/accounts/expense/list",
+              link: "/accounts/expense/expense-list",
             },
           ],
         },

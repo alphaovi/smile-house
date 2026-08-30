@@ -1,9 +1,10 @@
 // expenseData.js
 export const expenseCategories = {
   "Office Expense": ["Utility", "Rent", "Stationery", "Snacks"],
+  "Materials": ["Crown", "Denture", "Orthodontics"],
   "Sales & Marketing": ["Transportation", "Advertising"],
-  "Employee": ["Salary", "Entertainment"],
-  "Other": ["Bank Charge", "Maintenance", "Legal Expense"],
+  Employee: ["Salary", "Entertainment"],
+  Other: ["Bank Charge", "Maintenance", "Legal Expense"],
 };
 
 export const fakeBankList = [
@@ -12,5 +13,5 @@ export const fakeBankList = [
   "Dutch-Bangla Bank",
   "Bkash",
   "Nagad",
-  "Petty Cash"
+  "Petty Cash",
 ];

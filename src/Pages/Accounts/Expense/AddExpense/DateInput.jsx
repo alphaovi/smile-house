@@ -1,5 +1,10 @@
-import  { useRef } from "react";
-import { customInputContainerStyle, dateInputStyle, inputGroupStyle, labelStyle } from "./styles";
+import { useRef } from "react";
+import {
+  customInputContainerStyle,
+  dateInputStyle,
+  inputGroupStyle,
+  labelStyle,
+} from "../../../../services/styles";
 
 const DateInput = ({ value, onChange }) => {
   const dateInputRef = useRef(null);
