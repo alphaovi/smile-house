@@ -13,6 +13,8 @@ import CreatePayment from "../Accounts/CreatePayment/CreatePayment";
 import ViewPayment from "../Accounts/ViewPayment/ViewPayment/ViewPayment";
 import AddExpense from "../Accounts/Expense/AddExpense/AddExpense";
 import ExpenseList from "../Accounts/Expense/ExpenseList/ExpenseList";
+import CreateAsset from "../Accounts/Asset/CreateAsset/CreateAsset";
+import AssetList from "../Accounts/Asset/AssetList/AssetList";
 
 const router = createBrowserRouter([
   {
@@ -58,6 +60,14 @@ const router = createBrowserRouter([
       {
         path: "/accounts/expense/expense-list",
         element: <ExpenseList></ExpenseList>,
+      },
+      {
+        path: "/accounts/asset/create-asset",
+        element: <CreateAsset></CreateAsset>,
+      },
+      {
+        path: "/accounts/asset/asset-list",
+        element: <AssetList></AssetList>,
       },
       // {
       //     path: "order/create-order",

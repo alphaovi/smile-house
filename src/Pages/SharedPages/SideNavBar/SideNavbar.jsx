@@ -113,9 +113,14 @@ const SideNavbar = () => {
           icon: <Briefcase className="size-4 shrink-0" />,
           children: [
             {
+              name: "Create Asset",
+              icon: <List className="size-4 shrink-0" />,
+              link: "/accounts/asset/create-asset",
+            },
+            {
               name: "Asset List",
               icon: <List className="size-4 shrink-0" />,
-              link: "/accounts/asset/list",
+              link: "/accounts/asset/asset-list",
             },
           ],
         },
