@@ -1,7 +1,11 @@
 import { useState } from "react";
+import { useNavigate } from "react-router"; 
 import Swal from "sweetalert2";
 import { toast } from "react-toastify";
-import { expenseCategories, fakeBankList } from "../../../../services/expenseData";
+import {
+  expenseCategories,
+  fakeBankList,
+} from "../../../../services/expenseData";
 import DateInput from "./DateInput";
 import GroupSelect from "./GroupSelect";
 import TypeSelect from "./TypeSelect";
@@ -18,6 +22,8 @@ import {
 } from "../../../../services/styles";
 
 const AddExpense = () => {
+  const navigate = useNavigate();
+
   const initialFormState = {
     date: new Date().toISOString().split("T")[0],
     group: "",
@@ -40,7 +46,6 @@ const AddExpense = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // SweetAlert2 Confirmation Popup
     Swal.fire({
       title: "Are you sure?",
       text: `Do you want to add ৳${formData.amount} under ${formData.type}?`,
@@ -56,10 +61,8 @@ const AddExpense = () => {
       },
     }).then((result) => {
       if (result.isConfirmed) {
-        // Submit Logic / API Call
         console.log("Submitted Data:", formData);
 
-        // React-Toastify Success Message
         toast.success("Expense added successfully! 🎉", {
           position: "top-right",
           autoClose: 3000,
@@ -69,7 +72,6 @@ const AddExpense = () => {
           draggable: true,
         });
 
-        // Form Reset
         setFormData(initialFormState);
       }
     });
@@ -79,16 +81,59 @@ const AddExpense = () => {
     ? expenseCategories[formData.group]
     : [];
 
+  const headerContainerStyle = {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+  };
+
+  // ইমেজের মতো হুবহু ডিজাইন (Pill Button Style)
+  const listButtonStyle = {
+    backgroundColor: "#523bf7", // ছবির মতো উজ্জ্বল ভায়োলেট কালার
+    color: "#ffffff",
+    border: "none",
+    padding: "10px 22px",
+    borderRadius: "20px", // রাউন্ডেড শেপ
+    fontSize: "14px",
+    fontWeight: "600",
+    cursor: "pointer",
+    boxShadow: "0px 4px 10px rgba(82, 59, 247, 0.25)", // হালকা ড্রপ শ্যাডো
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "6px",
+    transition: "all 0.2s ease-in-out",
+  };
+
   return (
     <div style={pageWrapperStyle}>
       <div style={cardStyle}>
         <div style={headerStyle}>
-          <h2 style={{ margin: 0, fontSize: "22px", color: "#1e293b" }}>
-            Add New Expense
-          </h2>
-          <p style={{ margin: "5px 0 0", color: "#64748b", fontSize: "14px" }}>
-            Fill in the details to record your expense
-          </p>
+          <div style={headerContainerStyle}>
+            <div>
+              <h2 style={{ margin: 0, fontSize: "22px", color: "#1e293b" }}>
+                Add New Expense
+              </h2>
+              <p
+                style={{
+                  margin: "5px 0 0",
+                  color: "#64748b",
+                  fontSize: "14px",
+                }}
+              >
+                Fill in the details to record your expense
+              </p>
+            </div>
+
+            {/* ইমেজের মতো স্টাইল করা বাটন */}
+            <button
+              type="button"
+              style={listButtonStyle}
+              onClick={() => navigate("/accounts/expense/expense-list")}
+            >
+              <span>+</span> Expense List
+            </button>
+          </div>
         </div>
 
         <form onSubmit={handleSubmit} style={formStyle}>

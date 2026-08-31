@@ -23,7 +23,7 @@ const ExpenseListFilter = ({
           </p>
         </div>
         <div>
-          <Link to="/accounts/expense/add-expense">
+          <Link to="/accounts/expense/add-expenses">
             <button className="bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold px-5 py-2.5 rounded-xl shadow-sm transition-all active:scale-95 cursor-pointer">
               + Add New Expense
             </button>
