@@ -14,7 +14,9 @@ import ViewPayment from "../Accounts/ViewPayment/ViewPayment/ViewPayment";
 import AddExpense from "../Accounts/Expense/AddExpense/AddExpense";
 import ExpenseList from "../Accounts/Expense/ExpenseList/ExpenseList";
 import CreateAsset from "../Accounts/Asset/CreateAsset/CreateAsset";
+import AssetSell from "../Accounts/Asset/AssetSell/AssetSell";
 import AssetList from "../Accounts/Asset/AssetList/AssetList";
+import AddLiability from "../Accounts/Liabilities/AddLiability/AddLiability";
 
 const router = createBrowserRouter([
   {
@@ -62,12 +64,20 @@ const router = createBrowserRouter([
         element: <ExpenseList></ExpenseList>,
       },
       {
-        path: "/accounts/asset/create-asset",
+        path: "/accounts/asset/asset-buy",
         element: <CreateAsset></CreateAsset>,
+      },
+      {
+        path: "/accounts/asset/asset-sell",
+        element: <AssetSell></AssetSell>,
       },
       {
         path: "/accounts/asset/asset-list",
         element: <AssetList></AssetList>,
+      },
+      {
+        path: "/accounts/liability/add-liability",
+        element: <AddLiability></AddLiability>,
       },
       // {
       //     path: "order/create-order",

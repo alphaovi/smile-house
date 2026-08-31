@@ -113,9 +113,14 @@ const SideNavbar = () => {
           icon: <Briefcase className="size-4 shrink-0" />,
           children: [
             {
-              name: "Create Asset",
+              name: "Asset Buy",
               icon: <List className="size-4 shrink-0" />,
-              link: "/accounts/asset/create-asset",
+              link: "/accounts/asset/asset-buy",
+            },
+            {
+              name: "Asset Sell",
+              icon: <List className="size-4 shrink-0" />,
+              link: "/accounts/asset/asset-sell",
             },
             {
               name: "Asset List",
@@ -129,9 +134,19 @@ const SideNavbar = () => {
           icon: <Scale className="size-4 shrink-0" />,
           children: [
             {
+              name: "Add Liability",
+              icon: <List className="size-4 shrink-0" />,
+              link: "/accounts/liability/add-liability",
+            },
+            {
+              name: "Paid Liabilities",
+              icon: <List className="size-4 shrink-0" />,
+              link: "/accounts/liability/paid-liabilities",
+            },
+            {
               name: "Liability List",
               icon: <List className="size-4 shrink-0" />,
-              link: "/accounts/liability/list",
+              link: "/accounts/liability/liability-list",
             },
           ],
         },
