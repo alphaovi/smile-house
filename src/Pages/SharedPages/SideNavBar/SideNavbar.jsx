@@ -155,6 +155,11 @@ const SideNavbar = () => {
           icon: <PieChart className="size-4 shrink-0" />,
           children: [
             {
+              name: "Structure Of Shareholders",
+              icon: <List className="size-4 shrink-0" />,
+              link: "/accounts/equity/shareholder-structure",
+            },
+            {
               name: "Equity Summary",
               icon: <List className="size-4 shrink-0" />,
               link: "/accounts/equity/summary",
