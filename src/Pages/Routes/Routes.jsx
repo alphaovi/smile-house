@@ -17,6 +17,8 @@ import CreateAsset from "../Accounts/Asset/CreateAsset/CreateAsset";
 import AssetSell from "../Accounts/Asset/AssetSell/AssetSell";
 import AssetList from "../Accounts/Asset/AssetList/AssetList";
 import AddLiability from "../Accounts/Liabilities/AddLiability/AddLiability";
+import CreatepaidLiability from "../Accounts/Liabilities/PaidLiabilities/CreatePaidLiability";
+import LiabilityList from "../Accounts/Liabilities/LiabilityList/LiabilityList";
 
 const router = createBrowserRouter([
   {
@@ -78,6 +80,14 @@ const router = createBrowserRouter([
       {
         path: "/accounts/liability/add-liability",
         element: <AddLiability></AddLiability>,
+      },
+      {
+        path: "/accounts/liability/paid-liabilities",
+        element: <CreatepaidLiability></CreatepaidLiability>,
+      },
+      {
+        path: "/accounts/liability/liability-list",
+        element: <LiabilityList></LiabilityList>,
       },
       // {
       //     path: "order/create-order",

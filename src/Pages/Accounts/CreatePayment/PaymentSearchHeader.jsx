@@ -9,7 +9,7 @@ const PaymentSearchHeader = ({
   doctorsList, 
   onSelectDoctor, 
   onSelectClinic, 
-  onSearch 
+  
 }) => {
   const [showDoctorDropdown, setShowDoctorDropdown] = useState(false);
   const [showClinicDropdown, setShowClinicDropdown] = useState(false);
@@ -127,13 +127,7 @@ const PaymentSearchHeader = ({
         />
 
         {/* Search Button */}
-        <button
-          type="button"
-          onClick={onSearch}
-          className="bg-emerald-500 text-white font-bold px-6 py-2 rounded hover:bg-emerald-600 transition-colors"
-        >
-          Search
-        </button>
+        
       </div>
     </div>
   );
