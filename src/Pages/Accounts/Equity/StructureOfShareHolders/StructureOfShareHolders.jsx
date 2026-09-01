@@ -1,6 +1,6 @@
 import { useState } from "react";
 import CapitalHeader from "./CapitalHeader";
-import ShareholderCard from "./ShareholderCard";
+import ShareholderCard from "./ShareHolderCard";
 import AddCapitalModal from "./AddCapitalModal";
 
 const StructureOfShareHolders = () => {
