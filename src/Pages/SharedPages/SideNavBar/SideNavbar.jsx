@@ -1,21 +1,30 @@
 import { useRef, useState } from "react";
 import {
-  CircleDollarSign,
   LayoutDashboard,
   ShoppingBag,
   Users,
-  List,
   Trash2,
-  ReceiptText,
   FilePlus,
-  CreditCard,
   Menu,
   X,
-  Receipt,
   TrendingDown,
   Briefcase,
   Scale,
   PieChart,
+  Settings,
+  FileBarChart,
+  Clock,
+  ClipboardList,
+  Wallet,
+  ArrowDownLeft,
+  Eye,
+  PlusCircle,
+  Building,
+  DollarSign,
+  MinusCircle,
+  CheckCircle2,
+  UserCheck,
+  FileSpreadsheet,
 } from "lucide-react";
 import { Outlet, NavLink } from "react-router";
 
@@ -47,12 +56,12 @@ const SideNavbar = () => {
         },
         {
           name: "Requested Order",
-          icon: <CircleDollarSign className="size-4 shrink-0" />,
+          icon: <Clock className="size-4 shrink-0" />,
           link: "/order/requested-order",
         },
         {
           name: "Order List",
-          icon: <List className="size-4 shrink-0" />,
+          icon: <ClipboardList className="size-4 shrink-0" />,
           link: "/order/order-list",
         },
         {
@@ -68,26 +77,26 @@ const SideNavbar = () => {
       children: [
         {
           name: "Income",
-          icon: <CircleDollarSign className="size-4 shrink-0" />,
+          icon: <Wallet className="size-4 shrink-0" />,
           children: [
             {
               name: "Payment Request",
-              icon: <CircleDollarSign className="size-4 shrink-0" />,
+              icon: <ArrowDownLeft className="size-4 shrink-0" />,
               link: "/accounts/payment-request",
             },
             {
               name: "Create Payment",
-              icon: <CreditCard className="size-4 shrink-0" />,
+              icon: <PlusCircle className="size-4 shrink-0" />,
               link: "/accounts/create-payment",
             },
             {
               name: "View Payment",
-              icon: <Receipt className="size-4 shrink-0" />,
+              icon: <Eye className="size-4 shrink-0" />,
               link: "/accounts/view-payment",
             },
             {
               name: "Other Income",
-              icon: <ReceiptText className="size-4 shrink-0" />,
+              icon: <DollarSign className="size-4 shrink-0" />,
               link: "/accounts/other-income",
             },
           ],
@@ -98,12 +107,12 @@ const SideNavbar = () => {
           children: [
             {
               name: "Add Expense",
-              icon: <CreditCard className="size-4 shrink-0" />,
+              icon: <MinusCircle className="size-4 shrink-0" />,
               link: "/accounts/expense/add-expenses",
             },
             {
               name: "Expense List",
-              icon: <List className="size-4 shrink-0" />,
+              icon: <ClipboardList className="size-4 shrink-0" />,
               link: "/accounts/expense/expense-list",
             },
           ],
@@ -114,17 +123,17 @@ const SideNavbar = () => {
           children: [
             {
               name: "Asset Buy",
-              icon: <List className="size-4 shrink-0" />,
+              icon: <PlusCircle className="size-4 shrink-0" />,
               link: "/accounts/asset/asset-buy",
             },
             {
               name: "Asset Sell",
-              icon: <List className="size-4 shrink-0" />,
+              icon: <MinusCircle className="size-4 shrink-0" />,
               link: "/accounts/asset/asset-sell",
             },
             {
               name: "Asset List",
-              icon: <List className="size-4 shrink-0" />,
+              icon: <Building className="size-4 shrink-0" />,
               link: "/accounts/asset/asset-list",
             },
           ],
@@ -135,17 +144,17 @@ const SideNavbar = () => {
           children: [
             {
               name: "Add Liability",
-              icon: <List className="size-4 shrink-0" />,
+              icon: <PlusCircle className="size-4 shrink-0" />,
               link: "/accounts/liability/add-liability",
             },
             {
               name: "Paid Liabilities",
-              icon: <List className="size-4 shrink-0" />,
+              icon: <CheckCircle2 className="size-4 shrink-0" />,
               link: "/accounts/liability/paid-liabilities",
             },
             {
               name: "Liability List",
-              icon: <List className="size-4 shrink-0" />,
+              icon: <ClipboardList className="size-4 shrink-0" />,
               link: "/accounts/liability/liability-list",
             },
           ],
@@ -156,17 +165,28 @@ const SideNavbar = () => {
           children: [
             {
               name: "Structure Of Shareholders",
-              icon: <List className="size-4 shrink-0" />,
+              icon: <UserCheck className="size-4 shrink-0" />,
               link: "/accounts/equity/shareholder-structure",
             },
             {
               name: "Equity Summary",
-              icon: <List className="size-4 shrink-0" />,
+              icon: <FileSpreadsheet className="size-4 shrink-0" />,
               link: "/accounts/equity/summary",
             },
           ],
         },
       ],
+    },
+
+    {
+      name: "Reports",
+      icon: <FileBarChart className="size-5 shrink-0" />,
+      children: [],
+    },
+    {
+      name: "Settings",
+      icon: <Settings className="size-5 shrink-0" />,
+      link: "/settings",
     },
   ];
 

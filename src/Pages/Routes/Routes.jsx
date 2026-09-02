@@ -17,9 +17,17 @@ import CreateAsset from "../Accounts/Asset/CreateAsset/CreateAsset";
 import AssetSell from "../Accounts/Asset/AssetSell/AssetSell";
 import AssetList from "../Accounts/Asset/AssetList/AssetList";
 import AddLiability from "../Accounts/Liabilities/AddLiability/AddLiability";
-import CreatepaidLiability from "../Accounts/Liabilities/PaidLiabilities/CreatePaidLiability";
+import CreatePaidLiability from "../Accounts/Liabilities/PaidLiabilities/CreatePaidLiability";
 import LiabilityList from "../Accounts/Liabilities/LiabilityList/LiabilityList";
 import StructureOfShareHolders from "../Accounts/Equity/StructureOfShareHolders/StructureOfShareHolders";
+import Settings from "../Settings/Settings/Settings";
+import Customers from "../Settings/Customers/Customers";
+import Employees from "../Settings/Employee/Employees";
+import WorkAndPrice from "../Settings/WorkAndPrice/Products";
+
+
+
+
 
 const router = createBrowserRouter([
   {
@@ -84,7 +92,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/accounts/liability/paid-liabilities",
-        element: <CreatepaidLiability></CreatepaidLiability>,
+        element: <CreatePaidLiability></CreatePaidLiability>,
       },
       {
         path: "/accounts/liability/liability-list",
@@ -93,6 +101,26 @@ const router = createBrowserRouter([
       {
         path: "/accounts/equity/shareholder-structure",
         element: <StructureOfShareHolders></StructureOfShareHolders>,
+      },
+      {
+        path: "/settings",
+        element: <Settings></Settings>,
+      },
+      {
+        path: "/settings/customers",
+        element: <Customers></Customers>,
+      },
+      {
+        path: "/settings/work-price",
+        element: <Customers></Customers>,
+      },
+      {
+        path: "/settings/employees",
+        element: <Employees></Employees>,
+      },
+      {
+        path: "/settings/work-and-price",
+        element: <WorkAndPrice></WorkAndPrice>,
       },
       // {
       //     path: "order/create-order",
