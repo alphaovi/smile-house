@@ -1,4 +1,9 @@
-import { FilePlus, LayoutDashboardIcon, ShoppingBag, Users } from "lucide-react";
+import {
+  FilePlus,
+  LayoutDashboardIcon,
+  ShoppingBag,
+  Users,
+} from "lucide-react";
 
 const SideNavbar2 = () => {
   const navItems = [
@@ -16,11 +21,11 @@ const SideNavbar2 = () => {
         {
           name: "create-order",
           icon: <FilePlus className="size-5 shrink-0" />,
-          link: "/order/create-order",
+          link: "/order/create-case",
         },
         {
           name: "Reqeusted Order",
-          icon: <Users></Users>
+          icon: <Users></Users>,
         },
         {
           name: "Order List",

@@ -46,33 +46,33 @@ const SideNavbar = () => {
       icon: <LayoutDashboard className="size-5 shrink-0" />,
     },
     {
-      name: "Order",
+      name: "Case Management",
       icon: <ShoppingBag className="size-5 shrink-0" />,
       children: [
         {
-          name: "Create Order",
+          name: "Create Case",
           icon: <FilePlus className="size-4 shrink-0" />,
-          link: "/order/create-order",
+          link: "/case/create-case",
         },
         {
-          name: "Requested Order",
+          name: "Requested Cases",
           icon: <Clock className="size-4 shrink-0" />,
-          link: "/order/requested-order",
+          link: "case/requested-cases",
         },
         {
-          name: "Order List",
+          name: "Case List",
           icon: <ClipboardList className="size-4 shrink-0" />,
-          link: "/order/order-list",
+          link: "/case/case-list",
         },
         {
-          name: "Deleted Orders",
+          name: "Deleted Cases",
           icon: <Trash2 className="size-4 shrink-0" />,
-          link: "/order/deleted",
+          link: "/case/deleted",
         },
       ],
     },
     {
-      name: "Accounts",
+      name: "Finance",
       icon: <Users className="size-5 shrink-0" />,
       children: [
         {
@@ -82,22 +82,22 @@ const SideNavbar = () => {
             {
               name: "Payment Request",
               icon: <ArrowDownLeft className="size-4 shrink-0" />,
-              link: "/accounts/payment-request",
+              link: "/finance/payment-request",
             },
             {
               name: "Create Payment",
               icon: <PlusCircle className="size-4 shrink-0" />,
-              link: "/accounts/create-payment",
+              link: "/finance/create-payment",
             },
             {
               name: "View Payment",
               icon: <Eye className="size-4 shrink-0" />,
-              link: "/accounts/view-payment",
+              link: "/finance/view-payment",
             },
             {
               name: "Other Income",
               icon: <DollarSign className="size-4 shrink-0" />,
-              link: "/accounts/other-income",
+              link: "/finance/other-income",
             },
           ],
         },
@@ -108,12 +108,12 @@ const SideNavbar = () => {
             {
               name: "Add Expense",
               icon: <MinusCircle className="size-4 shrink-0" />,
-              link: "/accounts/expense/add-expenses",
+              link: "/finance/expense/add-expenses",
             },
             {
               name: "Expense List",
               icon: <ClipboardList className="size-4 shrink-0" />,
-              link: "/accounts/expense/expense-list",
+              link: "/finance/expense/expense-list",
             },
           ],
         },
@@ -124,17 +124,17 @@ const SideNavbar = () => {
             {
               name: "Asset Buy",
               icon: <PlusCircle className="size-4 shrink-0" />,
-              link: "/accounts/asset/asset-buy",
+              link: "/finance/asset/asset-buy",
             },
             {
               name: "Asset Sell",
               icon: <MinusCircle className="size-4 shrink-0" />,
-              link: "/accounts/asset/asset-sell",
+              link: "/finance/asset/asset-sell",
             },
             {
               name: "Asset List",
               icon: <Building className="size-4 shrink-0" />,
-              link: "/accounts/asset/asset-list",
+              link: "/finance/asset/asset-list",
             },
           ],
         },
@@ -145,17 +145,17 @@ const SideNavbar = () => {
             {
               name: "Add Liability",
               icon: <PlusCircle className="size-4 shrink-0" />,
-              link: "/accounts/liability/add-liability",
+              link: "/finance/liability/add-liability",
             },
             {
               name: "Paid Liabilities",
               icon: <CheckCircle2 className="size-4 shrink-0" />,
-              link: "/accounts/liability/paid-liabilities",
+              link: "/finance/liability/paid-liabilities",
             },
             {
               name: "Liability List",
               icon: <ClipboardList className="size-4 shrink-0" />,
-              link: "/accounts/liability/liability-list",
+              link: "/finance/liability/liability-list",
             },
           ],
         },
@@ -166,12 +166,12 @@ const SideNavbar = () => {
             {
               name: "Structure Of Shareholders",
               icon: <UserCheck className="size-4 shrink-0" />,
-              link: "/accounts/equity/shareholder-structure",
+              link: "/finance/equity/shareholder-structure",
             },
             {
               name: "Equity Summary",
               icon: <FileSpreadsheet className="size-4 shrink-0" />,
-              link: "/accounts/equity/summary",
+              link: "/finance/equity/summary",
             },
           ],
         },

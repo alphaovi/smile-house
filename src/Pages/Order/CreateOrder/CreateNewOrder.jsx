@@ -226,13 +226,16 @@ const CreateNewOrder = () => {
           </p>
         </div>
         <div className="flex items-center gap-3">
-         <Link to="/order/requested-order"> {/* Primary Blue Button */}
-          <button className="bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-5 py-2 rounded-2xl shadow-sm transition-all active:scale-95 cursor-pointer">
-            Requested Order
-          </button></Link>
+          <Link to="/case/requested-cases">
+            {" "}
+            {/* Primary Blue Button */}
+            <button className="bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-5 py-2 rounded-2xl shadow-sm transition-all active:scale-95 cursor-pointer">
+              Requested Order
+            </button>
+          </Link>
 
           {/* Secondary Gray Button */}
-          <Link to="/order/order-list">
+          <Link to="/case/case-list">
             <button className="bg-slate-600 hover:bg-slate-700 text-white text-xs font-semibold px-5 py-2 rounded-2xl shadow-sm transition-all active:scale-95 cursor-pointer">
               View Order List
             </button>

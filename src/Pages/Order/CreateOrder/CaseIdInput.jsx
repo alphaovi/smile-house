@@ -2,17 +2,17 @@ import { useState } from "react";
 
 const CaseIdInput = ({ caseId, setCaseId, existingIds }) => {
   const [isManual, setIsManual] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   // Generate Unique Auto Case ID
   const generateAutoId = () => {
-    let newId = '';
+    let newId = "";
     do {
-      newId = 'CS-' + Math.floor(100000 + Math.random() * 900000);
+      newId = "CS-" + Math.floor(100000 + Math.random() * 900000);
     } while (existingIds.includes(newId));
-    
+
     setCaseId(newId);
-    setError('');
+    setError("");
     setIsManual(false);
   };
 
@@ -20,9 +20,9 @@ const CaseIdInput = ({ caseId, setCaseId, existingIds }) => {
     const val = e.target.value;
     setCaseId(val);
     if (existingIds.includes(val)) {
-      setError('This Case ID already exists! Unique ID required.');
+      setError("This Case ID already exists! Unique ID required.");
     } else {
-      setError('');
+      setError("");
     }
   };
 
@@ -45,7 +45,7 @@ const CaseIdInput = ({ caseId, setCaseId, existingIds }) => {
             type="button"
             onClick={() => {
               setIsManual(true);
-              setCaseId('');
+              setCaseId("");
             }}
             className="text-xs text-slate-500 hover:underline font-semibold"
           >
@@ -59,12 +59,20 @@ const CaseIdInput = ({ caseId, setCaseId, existingIds }) => {
         value={caseId}
         onChange={handleManualChange}
         disabled={!isManual}
-        placeholder={isManual ? "Enter custom unique Case ID" : "Click Auto-Generate or Manual"}
+        placeholder={
+          isManual
+            ? "Enter custom unique Case ID"
+            : "Click Auto-Generate or Manual"
+        }
         className={`w-full bg-slate-50 border rounded-xl p-3 text-sm focus:outline-none ${
-          error ? 'border-rose-500 bg-rose-50/20' : 'border-slate-200 focus:ring-2 focus:ring-blue-500'
-        } ${!isManual && 'cursor-not-allowed opacity-80'}`}
+          error
+            ? "border-rose-500 bg-rose-50/20"
+            : "border-slate-200 focus:ring-2 focus:ring-blue-500"
+        } ${!isManual && "cursor-not-allowed opacity-80"}`}
       />
-      {error && <p className="text-xs text-rose-500 mt-1 font-semibold">{error}</p>}
+      {error && (
+        <p className="text-xs text-rose-500 mt-1 font-semibold">{error}</p>
+      )}
     </div>
   );
 };

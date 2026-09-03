@@ -26,14 +26,14 @@ const OrderListFilter = ({
         </div>
         <div className="flex items-center gap-3">
           {/* Primary Blue Button */}
-          <Link to="/order/requested-order">
+          <Link to="/case/requested-cases">
             <button className="bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold px-5 py-2 rounded-2xl shadow-sm transition-all active:scale-95 cursor-pointer">
               Requested Order
             </button>
           </Link>
 
           {/* Secondary Gray Button */}
-          <Link to="/order/create-order">
+          <Link to="/case/create-case">
             <button className="bg-slate-600 hover:bg-slate-700 text-white text-xs font-semibold px-5 py-2 rounded-2xl shadow-sm transition-all active:scale-95 cursor-pointer">
               + Create Order
             </button>

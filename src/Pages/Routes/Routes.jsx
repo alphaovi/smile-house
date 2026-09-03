@@ -25,10 +25,6 @@ import Customers from "../Settings/Customers/Customers";
 import Employees from "../Settings/Employee/Employees";
 import WorkAndPrice from "../Settings/WorkAndPrice/Products";
 
-
-
-
-
 const router = createBrowserRouter([
   {
     path: "/",
@@ -43,63 +39,63 @@ const router = createBrowserRouter([
         element: <Dashboard></Dashboard>,
       },
       {
-        path: "order/create-order",
+        path: "/case/create-case",
         element: <CreateNewOrder></CreateNewOrder>,
       },
       {
-        path: "order/requested-order",
+        path: "case/requested-cases",
         element: <RequestedOrder></RequestedOrder>,
       },
       {
-        path: "order/order-list",
+        path: "case/case-list",
         element: <ViewOrderList></ViewOrderList>,
       },
       {
-        path: "/accounts/create-payment",
+        path: "/finance/create-payment",
         element: <CreatePayment></CreatePayment>,
       },
       {
-        path: "/accounts/payment-request",
+        path: "/finance/payment-request",
         element: <PaymentRequest></PaymentRequest>,
       },
       {
-        path: "/accounts/view-payment",
+        path: "/finance/view-payment",
         element: <ViewPayment></ViewPayment>,
       },
       {
-        path: "/accounts/expense/add-expenses",
+        path: "/finance/expense/add-expenses",
         element: <AddExpense></AddExpense>,
       },
       {
-        path: "/accounts/expense/expense-list",
+        path: "/finance/expense/expense-list",
         element: <ExpenseList></ExpenseList>,
       },
       {
-        path: "/accounts/asset/asset-buy",
+        path: "/finance/asset/asset-buy",
         element: <CreateAsset></CreateAsset>,
       },
       {
-        path: "/accounts/asset/asset-sell",
+        path: "/finance/asset/asset-sell",
         element: <AssetSell></AssetSell>,
       },
       {
-        path: "/accounts/asset/asset-list",
+        path: "/finance/asset/asset-list",
         element: <AssetList></AssetList>,
       },
       {
-        path: "/accounts/liability/add-liability",
+        path: "/finance/liability/add-liability",
         element: <AddLiability></AddLiability>,
       },
       {
-        path: "/accounts/liability/paid-liabilities",
+        path: "/finance/liability/paid-liabilities",
         element: <CreatePaidLiability></CreatePaidLiability>,
       },
       {
-        path: "/accounts/liability/liability-list",
+        path: "/finance/liability/liability-list",
         element: <LiabilityList></LiabilityList>,
       },
       {
-        path: "/accounts/equity/shareholder-structure",
+        path: "/finance/equity/shareholder-structure",
         element: <StructureOfShareHolders></StructureOfShareHolders>,
       },
       {
@@ -123,7 +119,7 @@ const router = createBrowserRouter([
         element: <WorkAndPrice></WorkAndPrice>,
       },
       // {
-      //     path: "order/create-order",
+      //     path: "order/create-case",
       //     element: <CreateOrder></CreateOrder>
       // },
       // {

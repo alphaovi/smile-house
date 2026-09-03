@@ -27,7 +27,7 @@ const RequestOrder = () => {
   // 🔹 ২. Approve করার সাথে সাথে স্টেট থেকে সরিয়ে ফেলার হ্যান্ডলার
   const handleApproveStatus = (approvedOrderId) => {
     setPaymentData((prevData) =>
-      prevData ? prevData.filter((item) => item.id !== approvedOrderId) : []
+      prevData ? prevData.filter((item) => item.id !== approvedOrderId) : [],
     );
   };
 
@@ -47,13 +47,13 @@ const RequestOrder = () => {
 
           <div className="flex gap-5">
             <Link
-              to="/order/create-order"
+              to="/case/create-case"
               className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2.5 rounded-xl font-bold text-xs transition shadow-sm"
             >
               + Create Order
             </Link>
             <Link
-              to="/order/order-list"
+              to="/case/case-list"
               className="bg-gray-500 hover:bg-blue-700 text-white px-4 py-2.5 rounded-xl font-bold text-xs transition shadow-sm"
             >
               View Order List
