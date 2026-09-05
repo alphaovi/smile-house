@@ -34,9 +34,9 @@ const StatusToggle = ({ status, onChange, disabled = false }) => {
         />
       </button>
 
-      {/* Status Text */}
+      {/* Status Text - w-16 এবং text-left যোগ করা হয়েছে */}
       <span
-        className={`text-sm font-medium ${
+        className={`w-16 text-left text-sm font-medium ${
           isActive ? "text-green-600" : "text-red-600"
         }`}
       >

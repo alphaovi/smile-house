@@ -20,6 +20,7 @@ import {
   Eye,
   PlusCircle,
   Building,
+  NotebookTabs,
   DollarSign,
   MinusCircle,
   CheckCircle2,
@@ -181,7 +182,13 @@ const SideNavbar = () => {
     {
       name: "Reports",
       icon: <FileBarChart className="size-5 shrink-0" />,
-      children: [],
+      children: [
+        {
+          name: "Work Summary",
+          icon: <NotebookTabs className="size-4 shrink-0"/>,
+          link: "/reports/work-summary"
+        }
+      ],
     },
     {
       name: "Settings",

@@ -24,6 +24,7 @@ import Settings from "../Settings/Settings/Settings";
 import Customers from "../Settings/Customers/Customers";
 import Employees from "../Settings/Employee/Employees";
 import WorkAndPrice from "../Settings/WorkAndPrice/Products";
+import WorkSummary from "../Reports/WorkSummary/WorkSummary";
 
 const router = createBrowserRouter([
   {
@@ -117,6 +118,10 @@ const router = createBrowserRouter([
       {
         path: "/settings/work-and-price",
         element: <WorkAndPrice></WorkAndPrice>,
+      },
+      {
+        path: "/reports/work-summary",
+        element: <WorkSummary></WorkSummary>,
       },
       // {
       //     path: "order/create-case",
