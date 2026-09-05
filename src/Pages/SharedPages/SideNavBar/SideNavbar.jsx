@@ -26,8 +26,11 @@ import {
   CheckCircle2,
   UserCheck,
   FileSpreadsheet,
+  IdCardLanyard,
+  BadgeDollarSign,
 } from "lucide-react";
 import { Outlet, NavLink } from "react-router";
+import ClientReport from "../../Reports/ClientReports/ClientReports/ClientReports";
 
 const SideNavbar = () => {
   const sidebarRef = useRef(null);
@@ -183,11 +186,22 @@ const SideNavbar = () => {
       name: "Reports",
       icon: <FileBarChart className="size-5 shrink-0" />,
       children: [
-        {
-          name: "Work Summary",
-          icon: <NotebookTabs className="size-4 shrink-0"/>,
-          link: "/reports/work-summary"
-        }
+       {
+        name : "Client Reports",
+        icon: <NotebookTabs className="size-4 shrink-0"/>,
+        link: "/reports/client-reports",
+       },
+       {
+        name : "Employee Reports",
+        icon: <IdCardLanyard className="size-4 shrink-0"/>,
+        link: "/reports/employee-reports",
+       },
+       {
+        name : "Financial Reports",
+        icon: <BadgeDollarSign className="size-4 shrink-0"/>,
+        link: "/reports/financial-reports",
+       },
+
       ],
     },
     {

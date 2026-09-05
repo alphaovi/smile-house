@@ -112,18 +112,7 @@ const WorkSummary = () => {
     });
   }, [reportData, startDate, endDate, filters]);
 
-  // Calculate total revenue from filtered records
-  const totalAmount = useMemo(
-    () => filteredData.reduce((acc, curr) => acc + curr.price, 0),
-    [filteredData]
-  );
 
-  // Calculate dynamic status count card based on selected status filter
-  const activeStatusLabel = filters.status ? filters.status : "Delivered";
-  const statusCardCount = useMemo(() => {
-    const targetStatus = filters.status || "Delivered";
-    return filteredData.filter((i) => i.status === targetStatus).length;
-  }, [filteredData, filters.status]);
 
   // Reset all filters and date states
   const handleReset = () => {
@@ -163,26 +152,7 @@ const WorkSummary = () => {
           </button>
         </div>
 
-        {/* Summary Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <div className="bg-white p-5 rounded-xl border border-gray-200/80 shadow-sm">
-            <span className="text-xs font-semibold text-gray-400 uppercase">Total Orders</span>
-            <p className="text-2xl font-bold text-gray-800 mt-1">{filteredData.length}</p>
-          </div>
-          <div className="bg-white p-5 rounded-xl border border-gray-200/80 shadow-sm">
-            <span className="text-xs font-semibold text-gray-400 uppercase">Total Revenue</span>
-            <p className="text-2xl font-bold text-blue-600 mt-1">৳ {totalAmount.toLocaleString()}</p>
-          </div>
-          {/* Dynamic Status Card */}
-          <div className="bg-white p-5 rounded-xl border border-gray-200/80 shadow-sm">
-            <span className="text-xs font-semibold text-gray-400 uppercase">
-              {activeStatusLabel} Orders
-            </span>
-            <p className="text-2xl font-bold text-emerald-600 mt-1">
-              {statusCardCount}
-            </p>
-          </div>
-        </div>
+       
 
         {/* Filters Panel */}
         <div className="bg-white p-6 rounded-2xl border border-gray-200/80 shadow-sm">

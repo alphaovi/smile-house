@@ -24,7 +24,11 @@ import Settings from "../Settings/Settings/Settings";
 import Customers from "../Settings/Customers/Customers";
 import Employees from "../Settings/Employee/Employees";
 import WorkAndPrice from "../Settings/WorkAndPrice/Products";
-import WorkSummary from "../Reports/WorkSummary/WorkSummary";
+import ClientReports from "../Reports/ClientReports/ClientReports/ClientReports";
+import EmployeeReports from "../Reports/EmployeeReports/EmployeeReports/EmployeeReports";
+import FinancialReports from "../Reports/FinancialReports/FinancialReports/FinancialReports";
+import WorkSummary from "../Reports/ClientReports/WorkSummary/WorkSummary"
+
 
 const router = createBrowserRouter([
   {
@@ -120,9 +124,24 @@ const router = createBrowserRouter([
         element: <WorkAndPrice></WorkAndPrice>,
       },
       {
+        path: "/reports/client-reports",
+        element: <ClientReports></ClientReports>,
+      },
+      {
         path: "/reports/work-summary",
         element: <WorkSummary></WorkSummary>,
       },
+      
+      {
+        path: "/reports/employee-reports",
+        element: <EmployeeReports></EmployeeReports>,
+      },
+      
+      {
+        path: "/reports/financial-reports",
+        element: <FinancialReports></FinancialReports>,
+      },
+      
       // {
       //     path: "order/create-case",
       //     element: <CreateOrder></CreateOrder>
