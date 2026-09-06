@@ -48,7 +48,7 @@ const ClientReports = () => {
       id: "payment-summary",
       title: "Payment Summary",
       description: "Track received payments, pending invoices, and total revenues.",
-      path: "/reports/payment-summary",
+      path: "/reports/payment-summary-reports",
       icon: CreditCard,
       badge: "Finance",
       gradient: "from-purple-500 to-pink-600",
