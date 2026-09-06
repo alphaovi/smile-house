@@ -29,6 +29,12 @@ import EmployeeReports from "../Reports/EmployeeReports/EmployeeReports/Employee
 import FinancialReports from "../Reports/FinancialReports/FinancialReports/FinancialReports";
 import WorkSummary from "../Reports/ClientReports/WorkSummary/WorkSummary"
 import PaymentSummaryDashboard from "../Reports/ClientReports/PaymentSummary/PaymentSummaryDashboard";
+import ClientStatement from "../Reports/ClientReports/ClientStatement/ClientStatement";
+
+
+
+
+
 
 const router = createBrowserRouter([
   {
@@ -126,6 +132,10 @@ const router = createBrowserRouter([
       {
         path: "/reports/client-reports",
         element: <ClientReports></ClientReports>,
+      },
+      {
+        path: "/reports/client-statement",
+        element: <ClientStatement></ClientStatement>,
       },
       {
         path: "/reports/payment-summary-reports",

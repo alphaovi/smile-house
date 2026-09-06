@@ -1,15 +1,15 @@
-
 import { Link } from "react-router";
 import { 
   FileText, 
   Briefcase, 
   FolderCheck, 
   CreditCard, 
+  Receipt,
   ArrowRight 
 } from "lucide-react";
 
 const ClientReports = () => {
-  // 4 Cards configuration data
+  // 5 Cards configuration data
   const reportCards = [
     {
       id: "client-statement",
@@ -55,6 +55,17 @@ const ClientReports = () => {
       lightBg: "bg-purple-50 text-purple-600",
       hoverBorder: "hover:border-purple-300",
     },
+    {
+      id: "client-ledger",
+      title: "Client Ledger",
+      description: "Monitor debit/credit balances, invoice logs, and client account history.",
+      path: "/reports/client-ledger",
+      icon: Receipt,
+      badge: "Ledger",
+      gradient: "from-rose-500 to-red-600",
+      lightBg: "bg-rose-50 text-rose-600",
+      hoverBorder: "hover:border-rose-300",
+    },
   ];
 
   return (
@@ -76,8 +87,8 @@ const ClientReports = () => {
           </div>
         </div>
 
-        {/* 4 Modern Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* 5 Modern Cards Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
           {reportCards.map((card) => {
             const Icon = card.icon;
             return (
