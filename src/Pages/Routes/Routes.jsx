@@ -28,10 +28,10 @@ import ClientReports from "../Reports/ClientReports/ClientReports/ClientReports"
 import EmployeeReports from "../Reports/EmployeeReports/EmployeeReports/EmployeeReports";
 import FinancialReports from "../Reports/FinancialReports/FinancialReports/FinancialReports";
 import WorkSummary from "../Reports/ClientReports/WorkSummary/WorkSummary"
-import PaymentSummaryDashboard from "../Reports/ClientReports/PaymentSummary/PaymentSummaryDashboard";
+
 import ClientStatement from "../Reports/ClientReports/ClientStatement/ClientStatement";
-
-
+import PaymentSummary from "../Reports/PaymentSummaryNew/PaymentSummary";
+import CaseSummary from "../Reports/ClientReports/CaseSummary/CaseSummary"
 
 
 
@@ -138,9 +138,14 @@ const router = createBrowserRouter([
         element: <ClientStatement></ClientStatement>,
       },
       {
-        path: "/reports/payment-summary-reports",
-        element: <PaymentSummaryDashboard></PaymentSummaryDashboard>,
+        path: "/reports/case-summary",
+        element: <CaseSummary></CaseSummary>,
       },
+      {
+        path: "/reports/payment-summary-reports",
+        element: <PaymentSummary></PaymentSummary>,
+      },
+      
       {
         path: "/reports/work-summary",
         element: <WorkSummary></WorkSummary>,

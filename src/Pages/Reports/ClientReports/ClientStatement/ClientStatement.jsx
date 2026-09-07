@@ -146,7 +146,7 @@ const ClientStatement = () => {
       <div className="max-w-7xl mx-auto space-y-6">
         <div className="border-b border-slate-200 pb-5">
           <h1 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">
-            Client Statement Ledger
+            Client Statement
           </h1>
           <p className="text-slate-500 text-sm mt-0.5">
             Detailed delivery statements and account balance breakdown
