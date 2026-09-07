@@ -1,4 +1,4 @@
-import  { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import FilterSection from './FilterSection';
 import StatementTable from './StatementTable';
 import StatementSummary from './StatementSummary';
@@ -9,10 +9,10 @@ const ClientStatement = () => {
   const [fromDate, setFromDate] = useState('2026-01-01');
   const [toDate, setToDate] = useState('2026-09-30');
   const [selectedState, setSelectedState] = useState('All');
-  const [selectedClinic, setSelectedClinic] = useState('All');
-  const [selectedDoctor, setSelectedDoctor] = useState('All');
+  const [selectedClinic, setSelectedClinic] = useState('');
+  const [selectedDoctor, setSelectedDoctor] = useState('');
   const [searchDoctorText, setSearchDoctorText] = useState('');
-  const [paymentStatus, setPaymentStatus] = useState('none');
+  const [paymentStatus, setPaymentStatus] = useState('all'); // Default 'all' rakha hoyeche
   const [isSearched, setIsSearched] = useState(false);
 
   const [toastMessage, setToastMessage] = useState(null);
@@ -21,7 +21,9 @@ const ClientStatement = () => {
   useEffect(() => {
     fetch('/reportData.json')
       .then((res) => res.json())
-      .then((data) => setReportData(data || []))
+      .then((data) => {
+        setReportData(data || []);
+      })
       .catch((err) => console.error('Error fetching data:', err));
   }, []);
 
@@ -35,7 +37,7 @@ const ClientStatement = () => {
     return Array.from(new Set((reportData || []).map((item) => item.state))).filter(Boolean);
   }, [reportData]);
 
-  // ২. ক্লিনিক লিস্ট (স্টেট ফিল্টার সাপেক্ষে)
+  // ২. ফিল্টারড ক্লিনিক লিস্ট
   const filteredClinics = useMemo(() => {
     const list = (reportData || [])
       .filter((item) => selectedState === 'All' || item.state === selectedState)
@@ -46,7 +48,7 @@ const ClientStatement = () => {
     return Array.from(uniqueMap.values());
   }, [selectedState, reportData]);
 
-  // ৩. ডাক্তার লিস্ট (স্টেট ও সার্চ সাপেক্ষে)
+  // ৩. ফিল্টারড ডাক্তার লিস্ট
   const filteredDoctors = useMemo(() => {
     const list = (reportData || [])
       .filter((item) => {
@@ -65,28 +67,27 @@ const ClientStatement = () => {
 
   // ৪. ডাইনামিক অটো অ্যাড্রেস
   const autoAddress = useMemo(() => {
-    if (selectedClinic !== 'All') {
-      const match = (reportData || []).find((item) => String(item.clinicId) === String(selectedClinic));
-      return match?.address || '';
-    }
-    if (selectedDoctor !== 'All') {
+    if (selectedDoctor) {
       const match = (reportData || []).find((item) => String(item.doctorId) === String(selectedDoctor));
-      return match?.address || '';
+      if (match?.address) return match.address;
+    }
+    if (selectedClinic) {
+      const match = (reportData || []).find((item) => String(item.clinicId) === String(selectedClinic));
+      if (match?.address) return match.address;
     }
     return 'Select a Doctor or Clinic to view address';
   }, [selectedClinic, selectedDoctor, reportData]);
 
-  // ৫. ফিল্টার অনুযায়ী টেবিলের ডেটা ফিল্টারিং
+  // ৫. ফিল্টার অনুযায়ী ডেটা ফিল্টারিং (এখানে ফিক্স করা হয়েছে)
   const tableData = useMemo(() => {
-    if (!isSearched || paymentStatus === 'none') return [];
+    if (!isSearched || paymentStatus === 'none' || !selectedDoctor) return [];
 
     const start = new Date(fromDate);
     const end = new Date(toDate);
 
     return (reportData || []).filter((item) => {
-      const matchState = selectedState === 'All' || item.state === selectedState;
-      const matchClinic = selectedClinic === 'All' || String(item.clinicId) === String(selectedClinic);
-      const matchDoctor = selectedDoctor === 'All' || String(item.doctorId) === String(selectedDoctor);
+      // ডক্টর সিলেক্ট থাকলে সরাসরি ডক্টর আইডি ম্যাচ করবে
+      const matchDoctor = String(item.doctorId) === String(selectedDoctor);
 
       const pDate = new Date(item.deliveryDate);
       const matchDate = pDate >= start && pDate <= end;
@@ -95,11 +96,11 @@ const ClientStatement = () => {
       if (paymentStatus === 'paid') matchStatus = item.status === 'paid';
       if (paymentStatus === 'unpaid') matchStatus = item.status === 'unpaid';
 
-      return matchState && matchClinic && matchDoctor && matchDate && matchStatus;
+      return matchDoctor && matchDate && matchStatus;
     });
-  }, [isSearched, fromDate, toDate, selectedState, selectedClinic, selectedDoctor, paymentStatus, reportData]);
+  }, [isSearched, fromDate, toDate, selectedDoctor, paymentStatus, reportData]);
 
-  // ৬. মোট পেইড ও আনপেইড অ্যামাউন্ট হিসাব
+  // ৬. মোট হিসাব
   const { totalPaid, totalUnpaid } = useMemo(() => {
     return tableData.reduce(
       (acc, curr) => {
@@ -113,7 +114,12 @@ const ClientStatement = () => {
     );
   }, [tableData]);
 
+  // ৭. সার্চ বাটন ভ্যালিডেশন
   const handleSearch = () => {
+    if (!selectedDoctor) {
+      triggerToast('Please Select a Doctor to load statement');
+      return;
+    }
     if (paymentStatus === 'none') {
       triggerToast('Please Select Payment Status (ALL, PAID, or UNPAID)');
       return;
@@ -147,7 +153,6 @@ const ClientStatement = () => {
           </p>
         </div>
 
-        {/* Filter Controls Component */}
         <FilterSection
           fromDate={fromDate}
           setFromDate={setFromDate}
@@ -171,7 +176,6 @@ const ClientStatement = () => {
           handleSearch={handleSearch}
         />
 
-        {/* Table & Summary Section */}
         {isSearched && (
           <div className="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-xl">
             <StatementTable

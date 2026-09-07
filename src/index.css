@@ -37,3 +37,10 @@
   --font-primary: 'Poppins', sans-serif;
 }
 
+/* react-datepicker full width support */
+.react-datepicker-wrapper {
+  width: 100% !important;
+}
+.react-datepicker__input-container {
+  width: 100% !important;
+}

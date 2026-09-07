@@ -13,10 +13,9 @@ const WorkSummary = () => {
   // Filters State
   const [filters, setFilters] = useState({
     state: "",
-    doctor: "",
-    clinic: "",
-    sr: "",
     status: "",
+    clinic: "",
+    doctor: "",
   });
 
   // Fetch report data on component mount
@@ -38,31 +37,26 @@ const WorkSummary = () => {
     setFilters((prev) => {
       const updated = { ...prev, [key]: value };
 
-      // Reset doctor and clinic when SR changes
-      if (key === "sr") {
-        updated.doctor = "";
+      if (key === "state") {
         updated.clinic = "";
+        updated.doctor = "";
       }
 
-      // Automatically sync clinic when a doctor is selected or deselected
-      if (key === "doctor") {
+      if (key === "clinic") {
         if (value) {
-          const docRecord = reportData.find((item) => item.doctorId === value);
-          if (docRecord) updated.clinic = docRecord.clinicId;
+          const match = reportData.find((item) => String(item.clinicId) === String(value));
+          if (match) updated.doctor = match.doctorId;
         } else {
-          // Reset clinic to "All Clinics" when doctor filter is cleared
-          updated.clinic = "";
+          updated.doctor = "";
         }
       }
 
-      // Automatically sync doctor when a clinic is selected or deselected
-      if (key === "clinic") {
+      if (key === "doctor") {
         if (value) {
-          const clinicRecord = reportData.find((item) => item.clinicId === value);
-          if (clinicRecord) updated.doctor = clinicRecord.doctorId;
+          const match = reportData.find((item) => String(item.doctorId) === String(value));
+          if (match) updated.clinic = match.clinicId;
         } else {
-          // Reset doctor to "All Doctors" when "All Clinics" is selected
-          updated.doctor = "";
+          updated.clinic = "";
         }
       }
 
@@ -76,49 +70,59 @@ const WorkSummary = () => {
     if (type === "endDate") setEndDate(val);
   };
 
-  // Extract unique states for dropdown options
+  // Unique lists for dropdowns
   const uniqueStates = useMemo(
-    () => Array.from(new Set(reportData.map((i) => i.state))),
+    () => Array.from(new Set(reportData.map((i) => i.state).filter(Boolean))),
     [reportData]
   );
 
-  // Extract unique statuses for dropdown options
   const uniqueStatuses = useMemo(
-    () => Array.from(new Set(reportData.map((i) => i.status))),
+    () => Array.from(new Set(reportData.map((i) => i.status).filter(Boolean))),
     [reportData]
   );
 
-  // Filter dataset based on selected date range and filter dropdowns
-  const filteredData = useMemo(() => {
-    return reportData.filter((item) => {
-      // Date range filter
-      if (startDate || endDate) {
-        const itemDate = new Date(item.date).setHours(0, 0, 0, 0);
-        const start = startDate ? new Date(startDate).setHours(0, 0, 0, 0) : null;
-        const end = endDate ? new Date(endDate).setHours(23, 59, 59, 999) : null;
+  // Safe Date Comparator Parser
+  const parseSafeDate = (dateStr) => {
+    if (!dateStr) return null;
+    const parts = dateStr.split("-");
+    if (parts.length === 3) {
+      return new Date(parts[0], parts[1] - 1, parts[2]).getTime();
+    }
+    const parsed = new Date(dateStr).getTime();
+    return isNaN(parsed) ? null : parsed;
+  };
 
-        if (start && itemDate < start) return false;
-        if (end && itemDate > end) return false;
+  // Filter dataset based on selected options
+  const filteredData = useMemo(() => {
+    const startTimestamp = parseSafeDate(startDate);
+    const endTimestamp = parseSafeDate(endDate);
+
+    return reportData.filter((item) => {
+      // Date filter logic
+      if (item.date) {
+        const itemTimestamp = parseSafeDate(item.date);
+
+        if (itemTimestamp) {
+          if (startTimestamp && itemTimestamp < startTimestamp) return false;
+          if (endTimestamp && itemTimestamp > endTimestamp) return false;
+        }
       }
 
       // Dropdown filters
       if (filters.state && item.state !== filters.state) return false;
-      if (filters.sr && item.srId !== filters.sr) return false;
-      if (filters.doctor && item.doctorId !== filters.doctor) return false;
-      if (filters.clinic && item.clinicId !== filters.clinic) return false;
       if (filters.status && item.status !== filters.status) return false;
+      if (filters.clinic && String(item.clinicId) !== String(filters.clinic)) return false;
+      if (filters.doctor && String(item.doctorId) !== String(filters.doctor)) return false;
 
       return true;
     });
   }, [reportData, startDate, endDate, filters]);
 
-
-
-  // Reset all filters and date states
+  // Reset all filters
   const handleReset = () => {
     setStartDate("");
     setEndDate("");
-    setFilters({ state: "", doctor: "", clinic: "", sr: "", status: "" });
+    setFilters({ state: "", status: "", clinic: "", doctor: "" });
   };
 
   if (loading) {
@@ -134,14 +138,14 @@ const WorkSummary = () => {
   return (
     <div className="p-6 bg-slate-50/50 min-h-screen">
       <div className="max-w-7xl mx-auto space-y-6">
-        {/* Header Section */}
+        {/* Header */}
         <div className="bg-white p-6 rounded-2xl border border-gray-200/80 shadow-sm flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <div>
             <h1 className="text-2xl font-bold text-gray-900 tracking-tight">
               Work Summary Report
             </h1>
             <p className="text-sm text-gray-500 mt-1">
-              Filter and analyze orders by dates, doctors, clinics, and representatives.
+              Filter and analyze orders by dates, status, clinics, and doctors.
             </p>
           </div>
           <button
@@ -151,8 +155,6 @@ const WorkSummary = () => {
             Reset Filters
           </button>
         </div>
-
-       
 
         {/* Filters Panel */}
         <div className="bg-white p-6 rounded-2xl border border-gray-200/80 shadow-sm">
@@ -168,7 +170,7 @@ const WorkSummary = () => {
           />
         </div>
 
-        {/* Summary Table */}
+        {/* Table */}
         <SummaryTable reportData={filteredData} />
       </div>
     </div>
