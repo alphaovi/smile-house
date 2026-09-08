@@ -27,11 +27,15 @@ import WorkAndPrice from "../Settings/WorkAndPrice/Products";
 import ClientReports from "../Reports/ClientReports/ClientReports/ClientReports";
 import EmployeeReports from "../Reports/EmployeeReports/EmployeeReports/EmployeeReports";
 import FinancialReports from "../Reports/FinancialReports/FinancialReports/FinancialReports";
-import WorkSummary from "../Reports/ClientReports/WorkSummary/WorkSummary"
+import WorkSummary from "../Reports/ClientReports/WorkSummary/WorkSummary";
 
 import ClientStatement from "../Reports/ClientReports/ClientStatement/ClientStatement";
 import PaymentSummary from "../Reports/PaymentSummaryNew/PaymentSummary";
-import CaseSummary from "../Reports/ClientReports/CaseSummary/CaseSummary"
+import CaseSummary from "../Reports/ClientReports/CaseSummary/CaseSummary";
+import ClientLedger from "../Reports/ClientReports/ClientLedger/ClientLedger";
+import OverDueInvoices from "../Reports/ClientReports/OverDueInvoices/OverDueInvoices";
+
+
 
 
 
@@ -142,25 +146,33 @@ const router = createBrowserRouter([
         element: <CaseSummary></CaseSummary>,
       },
       {
+        path: "/reports/client-ledger",
+        element: <ClientLedger></ClientLedger>,
+      },
+      {
         path: "/reports/payment-summary-reports",
         element: <PaymentSummary></PaymentSummary>,
       },
-      
+      {
+        path: "/reports/overdue-report",
+        element: <OverDueInvoices></OverDueInvoices>,
+      },
+
       {
         path: "/reports/work-summary",
         element: <WorkSummary></WorkSummary>,
       },
-      
+
       {
         path: "/reports/employee-reports",
         element: <EmployeeReports></EmployeeReports>,
       },
-      
+
       {
         path: "/reports/financial-reports",
         element: <FinancialReports></FinancialReports>,
       },
-      
+
       // {
       //     path: "order/create-case",
       //     element: <CreateOrder></CreateOrder>

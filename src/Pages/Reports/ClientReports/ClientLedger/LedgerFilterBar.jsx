@@ -1,6 +1,11 @@
+
 import { motion } from 'framer-motion';
 
-const CaseFilterBar = ({
+/**
+ * Filter Bar Component for Client Ledger
+ * Provides date-range picker, state, clinic, and doctor select options.
+ */
+const LedgerFilterBar = ({
   fromDate,
   setFromDate,
   toDate,
@@ -16,13 +21,14 @@ const CaseFilterBar = ({
   doctorOptions,
 }) => {
 
-  // ISO Date (YYYY-MM-DD) -> DD/MM/YYYY
+  // Helper function to convert ISO date (YYYY-MM-DD) to DD/MM/YYYY for display
   const formatToDDMMYYYY = (dateStr) => {
     if (!dateStr) return '';
     const [year, month, day] = dateStr.split('-');
     return `${day}/${month}/${year}`;
   };
 
+  // Helper to trigger browser native date picker on full-box click
   const handleContainerClick = (e) => {
     const input = e.currentTarget.querySelector('input[type="date"]');
     if (input) {
@@ -38,15 +44,15 @@ const CaseFilterBar = ({
     <motion.div
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, delay: 0.1 }}
-      className="bg-white rounded-xl shadow-sm border border-slate-200/80 p-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4"
+      transition={{ duration: 0.4 }}
+      className="bg-white rounded-xl shadow-sm border border-slate-200/80 p-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-6"
     >
-      {/* From Date */}
+      {/* From Date Filter */}
       <div>
         <label className="block text-xs font-medium text-slate-500 mb-1">
           From Date
         </label>
-        <div 
+        <div
           onClick={handleContainerClick}
           className="relative w-full px-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg cursor-pointer flex items-center justify-between focus-within:ring-2 focus-within:ring-slate-400"
         >
@@ -54,7 +60,6 @@ const CaseFilterBar = ({
             {fromDate ? formatToDDMMYYYY(fromDate) : "dd/mm/yyyy"}
           </span>
           <svg className="w-4 h-4 text-slate-500 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="0 0h24v24H0z" fill="none"/>
             <rect x="4" y="5" width="16" height="16" rx="2" />
             <line x1="16" y1="3" x2="16" y2="7" />
             <line x1="8" y1="3" x2="8" y2="7" />
@@ -64,17 +69,17 @@ const CaseFilterBar = ({
             type="date"
             value={fromDate}
             onChange={(e) => setFromDate(e.target.value)}
-            className="absolute inset-0 opacity-0 w-full h-full cursor-pointer  z-10"
+            className="absolute inset-0 opacity-0 w-full h-full cursor-pointer z-10"
           />
         </div>
       </div>
 
-      {/* To Date */}
+      {/* To Date Filter */}
       <div>
         <label className="block text-xs font-medium text-slate-500 mb-1">
           To Date
         </label>
-        <div 
+        <div
           onClick={handleContainerClick}
           className="relative w-full px-3 py-2 text-sm bg-slate-50 border border-slate-200 rounded-lg cursor-pointer flex items-center justify-between focus-within:ring-2 focus-within:ring-slate-400"
         >
@@ -82,7 +87,6 @@ const CaseFilterBar = ({
             {toDate ? formatToDDMMYYYY(toDate) : "dd/mm/yyyy"}
           </span>
           <svg className="w-4 h-4 text-slate-500 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="0 0h24v24H0z" fill="none"/>
             <rect x="4" y="5" width="16" height="16" rx="2" />
             <line x1="16" y1="3" x2="16" y2="7" />
             <line x1="8" y1="3" x2="8" y2="7" />
@@ -92,12 +96,12 @@ const CaseFilterBar = ({
             type="date"
             value={toDate}
             onChange={(e) => setToDate(e.target.value)}
-            className="absolute inset-0 opacity-0 w-full h-full cursor-pointer  z-10"
+            className="absolute inset-0 opacity-0 w-full h-full cursor-pointer z-10"
           />
         </div>
       </div>
 
-      {/* State Select */}
+      {/* State Selection */}
       <div>
         <label className="block text-xs font-medium text-slate-500 mb-1">
           State / Region
@@ -119,7 +123,7 @@ const CaseFilterBar = ({
         </select>
       </div>
 
-      {/* Clinic Select */}
+      {/* Clinic Selection */}
       <div>
         <label className="block text-xs font-medium text-slate-500 mb-1">
           Clinic
@@ -140,7 +144,7 @@ const CaseFilterBar = ({
         </select>
       </div>
 
-      {/* Doctor Select */}
+      {/* Doctor Selection */}
       <div>
         <label className="block text-xs font-medium text-slate-500 mb-1">
           Doctor
@@ -161,4 +165,4 @@ const CaseFilterBar = ({
   );
 };
 
-export default CaseFilterBar;
+export default LedgerFilterBar;

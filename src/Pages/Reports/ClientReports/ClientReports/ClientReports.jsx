@@ -5,7 +5,8 @@ import {
   FolderCheck, 
   CreditCard, 
   Receipt,
-  ArrowRight 
+  ArrowRight, 
+  HandCoins
 } from "lucide-react";
 
 const ClientReports = () => {
@@ -61,6 +62,17 @@ const ClientReports = () => {
       description: "Monitor debit/credit balances, invoice logs, and client account history.",
       path: "/reports/client-ledger",
       icon: Receipt,
+      badge: "Ledger",
+      gradient: "from-rose-500 to-red-600",
+      lightBg: "bg-rose-50 text-rose-600",
+      hoverBorder: "hover:border-rose-300",
+    },
+    {
+      id: "Over-Due",
+      title: "Over Due",
+      description: "Monitor debit/credit balances, invoice logs, and client account history.",
+      path: "/reports/overdue-report",
+      icon: HandCoins,
       badge: "Ledger",
       gradient: "from-rose-500 to-red-600",
       lightBg: "bg-rose-50 text-rose-600",
