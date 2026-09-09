@@ -1,0 +1,130 @@
+[
+  {
+    "technicianId": "TECH-001",
+    "name": "Alex Mercer",
+    "designation": "Senior Dental Technician",
+    "casesSupervised": 4,
+    "scannedOrders": [
+      { "invoiceId": "INV-1001", "items": { "crown": 5, "denture": 8, "bridge": 0 } },
+      { "invoiceId": "INV-1002", "items": { "crown": 7, "denture": 0, "aligner": 3 } },
+      { "invoiceId": "INV-1003", "items": { "implant": 2, "veneer": 4 } },
+      { "invoiceId": "INV-1004", "items": { "denture": 3, "crown": 1 } }
+    ]
+  },
+  {
+    "technicianId": "TECH-002",
+    "name": "Rahim Ahmed",
+    "designation": "Prosthetic Specialist",
+    "casesSupervised": 6,
+    "scannedOrders": [
+      { "invoiceId": "INV-1005", "items": { "denture": 12, "crown": 0, "nightGuard": 2 } },
+      { "invoiceId": "INV-1006", "items": { "bridge": 4, "implant": 5 } },
+      { "invoiceId": "INV-1007", "items": { "denture": 6, "veneer": 0 } },
+      { "invoiceId": "INV-1008", "items": { "aligner": 8, "crown": 2 } },
+      { "invoiceId": "INV-1009", "items": { "bridge": 1, "nightGuard": 3 } },
+      { "invoiceId": "INV-1010", "items": { "implant": 4, "denture": 5 } }
+    ]
+  },
+  {
+    "technicianId": "TECH-003",
+    "name": "Sofia Chen",
+    "designation": "CAD/CAM Specialist",
+    "casesSupervised": 4,
+    "scannedOrders": [
+      { "invoiceId": "INV-1011", "items": { "crown": 15, "veneer": 10 } },
+      { "invoiceId": "INV-1012", "items": { "implant": 0, "bridge": 2 } },
+      { "invoiceId": "INV-1013", "items": { "aligner": 6, "crown": 4 } },
+      { "invoiceId": "INV-1014", "items": { "veneer": 8, "denture": 0 } }
+    ]
+  },
+  {
+    "technicianId": "TECH-004",
+    "name": "Tanvir Hasan",
+    "designation": "Ceramics Master",
+    "casesSupervised": 6,
+    "scannedOrders": [
+      { "invoiceId": "INV-1015", "items": { "crown": 8, "bridge": 3 } },
+      { "invoiceId": "INV-1016", "items": { "denture": 5, "aligner": 0 } },
+      { "invoiceId": "INV-1017", "items": { "implant": 6, "veneer": 2 } },
+      { "invoiceId": "INV-1018", "items": { "crown": 11, "nightGuard": 1 } },
+      { "invoiceId": "INV-1019", "items": { "bridge": 5, "denture": 4 } },
+      { "invoiceId": "INV-1020", "items": { "crown": 3, "implant": 3 } }
+    ]
+  },
+  {
+    "technicianId": "TECH-005",
+    "name": "Elena Rostova",
+    "designation": "Orthodontic Technician",
+    "casesSupervised": 4,
+    "scannedOrders": [
+      { "invoiceId": "INV-1021", "items": { "aligner": 14, "retainer": 8 } },
+      { "invoiceId": "INV-1022", "items": { "retainer": 5, "nightGuard": 4 } },
+      { "invoiceId": "INV-1023", "items": { "aligner": 10, "crown": 0 } },
+      { "invoiceId": "INV-1024", "items": { "retainer": 6, "aligner": 2 } }
+    ]
+  },
+  {
+    "technicianId": "TECH-006",
+    "name": "Karim Abdullah",
+    "designation": "Lab Associate",
+    "casesSupervised": 4,
+    "scannedOrders": [
+      { "invoiceId": "INV-1025", "items": { "denture": 9, "crown": 2 } },
+      { "invoiceId": "INV-1026", "items": { "bridge": 6, "implant": 1 } },
+      { "invoiceId": "INV-1027", "items": { "crown": 4, "veneer": 5 } },
+      { "invoiceId": "INV-1028", "items": { "denture": 7, "bridge": 2 } }
+    ]
+  },
+  {
+    "technicianId": "TECH-007",
+    "name": "Maria Garcia",
+    "designation": "Implants Specialist",
+    "casesSupervised": 6,
+    "scannedOrders": [
+      { "invoiceId": "INV-1029", "items": { "implant": 10, "crown": 4 } },
+      { "invoiceId": "INV-1030", "items": { "implant": 8, "bridge": 2 } },
+      { "invoiceId": "INV-1031", "items": { "veneer": 6, "nightGuard": 0 } },
+      { "invoiceId": "INV-1032", "items": { "implant": 5, "denture": 3 } },
+      { "invoiceId": "INV-1033", "items": { "crown": 6, "implant": 4 } },
+      { "invoiceId": "INV-1034", "items": { "bridge": 3, "implant": 2 } }
+    ]
+  },
+  {
+    "technicianId": "TECH-008",
+    "name": "David Kim",
+    "designation": "Junior Technician",
+    "casesSupervised": 4,
+    "scannedOrders": [
+      { "invoiceId": "INV-1035", "items": { "nightGuard": 5, "denture": 2 } },
+      { "invoiceId": "INV-1036", "items": { "crown": 3, "aligner": 0 } },
+      { "invoiceId": "INV-1037", "items": { "bridge": 1, "retainer": 4 } },
+      { "invoiceId": "INV-1038", "items": { "nightGuard": 6, "crown": 2 } }
+    ]
+  },
+  {
+    "technicianId": "TECH-009",
+    "name": "Nusrat Jahan",
+    "designation": "Quality Controller",
+    "casesSupervised": 6,
+    "scannedOrders": [
+      { "invoiceId": "INV-1039", "items": { "crown": 12, "veneer": 9 } },
+      { "invoiceId": "INV-1040", "items": { "implant": 7, "bridge": 5 } },
+      { "invoiceId": "INV-1041", "items": { "denture": 10, "aligner": 4 } },
+      { "invoiceId": "INV-1042", "items": { "crown": 8, "implant": 3 } },
+      { "invoiceId": "INV-1043", "items": { "veneer": 7, "retainer": 2 } },
+      { "invoiceId": "INV-1044", "items": { "bridge": 4, "denture": 6 } }
+    ]
+  },
+  {
+    "technicianId": "TECH-010",
+    "name": "Liam Wilson",
+    "designation": "Restorative Technician",
+    "casesSupervised": 4,
+    "scannedOrders": [
+      { "invoiceId": "INV-1045", "items": { "denture": 4, "crown": 6 } },
+      { "invoiceId": "INV-1046", "items": { "bridge": 8, "veneer": 0 } },
+      { "invoiceId": "INV-1047", "items": { "implant": 3, "nightGuard": 5 } },
+      { "invoiceId": "INV-1048", "items": { "crown": 5, "denture": 2 } }
+    ]
+  }
+]

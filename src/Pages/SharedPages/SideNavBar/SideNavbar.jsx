@@ -28,9 +28,9 @@ import {
   FileSpreadsheet,
   IdCardLanyard,
   BadgeDollarSign,
+  Trash,
 } from "lucide-react";
 import { Outlet, NavLink } from "react-router";
-import ClientReport from "../../Reports/ClientReports/ClientReports/ClientReports";
 
 const SideNavbar = () => {
   const sidebarRef = useRef(null);
@@ -181,27 +181,25 @@ const SideNavbar = () => {
         },
       ],
     },
-
     {
       name: "Reports",
       icon: <FileBarChart className="size-5 shrink-0" />,
       children: [
-       {
-        name : "Client Reports",
-        icon: <NotebookTabs className="size-4 shrink-0"/>,
-        link: "/reports/client-reports",
-       },
-       {
-        name : "Employee Reports",
-        icon: <IdCardLanyard className="size-4 shrink-0"/>,
-        link: "/reports/employee-reports",
-       },
-       {
-        name : "Financial Reports",
-        icon: <BadgeDollarSign className="size-4 shrink-0"/>,
-        link: "/reports/financial-reports",
-       },
-
+        {
+          name: "Client Reports",
+          icon: <NotebookTabs className="size-4 shrink-0" />,
+          link: "/reports/client-reports",
+        },
+        {
+          name: "Employee Reports",
+          icon: <IdCardLanyard className="size-4 shrink-0" />,
+          link: "/reports/employee-reports",
+        },
+        {
+          name: "Financial Reports",
+          icon: <BadgeDollarSign className="size-4 shrink-0" />,
+          link: "/reports/financial-reports",
+        },
       ],
     },
     {
@@ -210,6 +208,12 @@ const SideNavbar = () => {
       link: "/settings",
     },
   ];
+
+  const binItem = {
+    name: "Bin",
+    icon: <Trash className="size-5 shrink-0" />,
+    link: "/bin",
+  };
 
   // Dynamic Multi-level Recursive Menu Renderer
   const renderNavList = (items, isMobile = false) => {
@@ -223,18 +227,26 @@ const SideNavbar = () => {
                 : ""
             }
           >
-            <summary className="flex items-center justify-between gap-4 py-2.5 hover:bg-base-300 rounded-lg cursor-pointer">
+            <summary className="flex items-center justify-between gap-4 py-2 hover:bg-base-300 rounded-lg cursor-pointer">
               <div className="flex items-center gap-3">
                 {item.icon}
                 <span
-                  className={`${!isMobile ? "opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap" : ""} font-medium`}
+                  className={`${
+                    !isMobile
+                      ? "opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap"
+                      : ""
+                  } font-medium text-sm`}
                 >
                   {item.name}
                 </span>
               </div>
             </summary>
             <ul
-              className={`ml-3 mt-1 border-l-2 border-base-300 pl-2 space-y-1 ${!isMobile ? "opacity-0 group-hover:opacity-100 transition-opacity duration-200" : ""}`}
+              className={`ml-3 mt-1 border-l-2 border-base-300 pl-2 space-y-1 ${
+                !isMobile
+                  ? "opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                  : ""
+              }`}
             >
               {renderNavList(item.children, isMobile)}
             </ul>
@@ -261,17 +273,45 @@ const SideNavbar = () => {
     ));
   };
 
+  const renderBinItem = (item, isMobile = false) => (
+    <li>
+      <NavLink
+        to={item.link || "#"}
+        onClick={() => isMobile && setIsMobileOpen(false)}
+        className="flex items-center gap-3 py-2 text-sm text-base-content/80 hover:text-primary rounded-md whitespace-nowrap hover:bg-base-100 shadow-[0_-2px_8px_rgba(0,0,0,0.08)]"
+      >
+        {item.icon}
+        <span
+          className={
+            !isMobile
+              ? "opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+              : ""
+          }
+        >
+          {item.name}
+        </span>
+      </NavLink>
+    </li>
+  );
+
   return (
     <div className="flex h-screen overflow-hidden bg-base-100">
       {/* ---------------- Desktop Sidebar ---------------- */}
       <aside
         ref={sidebarRef}
         onMouseLeave={handleMouseLeave}
-        className="hidden md:flex group z-20 flex-col bg-base-200 w-16 hover:w-64 transition-all duration-300 ease-in-out shadow-lg overflow-x-hidden"
+        className="hidden md:flex group z-20 flex-col bg-base-200 w-16 hover:w-64 transition-all duration-300 ease-in-out shadow-lg overflow-hidden justify-between h-full"
       >
-        <ul className="menu w-full p-2 space-y-1 grow pt-10 primaryColor">
+        <ul className="menu w-full p-2 space-y-1 grow pt-6 primaryColor overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
           {renderNavList(navItems, false)}
         </ul>
+
+        {/* Bottom Fixed Bin Item */}
+        <div className="w-full shrink-0 bg-base-200">
+          <ul className="menu w-full p-2 primaryColor">
+            {renderBinItem(binItem, false)}
+          </ul>
+        </div>
       </aside>
 
       {/* ---------------- Mobile Overlay ---------------- */}
@@ -284,28 +324,37 @@ const SideNavbar = () => {
 
       {/* ---------------- Mobile Sidebar Drawer ---------------- */}
       <aside
-        className={`fixed top-0 left-0 z-50 h-full w-64 bg-base-200 shadow-2xl transition-transform duration-300 ease-in-out md:hidden flex flex-col ${
+        className={`fixed top-0 left-0 z-50 h-full w-64 bg-base-200 shadow-2xl transition-transform duration-300 ease-in-out md:hidden flex flex-col justify-between ${
           isMobileOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <div className="flex items-center justify-between p-4 border-b border-base-300">
-          <span className="font-bold text-lg">Smile House</span>
-          <button
-            onClick={() => setIsMobileOpen(false)}
-            className="p-1 rounded-md hover:bg-base-300 transition-colors"
-          >
-            <X className="size-6" />
-          </button>
+        <div className="flex flex-col grow overflow-hidden">
+          <div className="flex items-center justify-between p-4 border-b border-base-300 shrink-0">
+            <span className="font-bold text-lg">Smile House</span>
+            <button
+              onClick={() => setIsMobileOpen(false)}
+              className="p-1 rounded-md hover:bg-base-300 transition-colors"
+            >
+              <X className="size-6" />
+            </button>
+          </div>
+
+          <ul className="menu w-full p-4 space-y-1 grow overflow-y-auto primaryColor [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+            {renderNavList(navItems, true)}
+          </ul>
         </div>
 
-        <ul className="menu w-full p-4 space-y-1 grow overflow-y-auto primaryColor">
-          {renderNavList(navItems, true)}
-        </ul>
+        {/* Bottom Fixed Bin Item (Mobile) */}
+        <div className="w-full shrink-0 bg-base-200">
+          <ul className="menu w-full p-4 primaryColor">
+            {renderBinItem(binItem, true)}
+          </ul>
+        </div>
       </aside>
 
       {/* ---------------- Main Content Area ---------------- */}
       <div className="flex flex-1 flex-col overflow-y-auto">
-        <nav className="navbar h-16 w-full bg-base-300 border-b border-base-200 px-4 secondaryColor flex items-center gap-3">
+        <nav className="navbar h-16 w-full bg-base-300 border-b border-base-200 px-4 secondaryColor flex items-center gap-3 shrink-0">
           {/* Mobile Menu Toggle Button */}
           <button
             onClick={() => setIsMobileOpen(true)}

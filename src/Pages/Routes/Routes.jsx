@@ -34,7 +34,11 @@ import PaymentSummary from "../Reports/PaymentSummaryNew/PaymentSummary";
 import CaseSummary from "../Reports/ClientReports/CaseSummary/CaseSummary";
 import ClientLedger from "../Reports/ClientReports/ClientLedger/ClientLedger";
 import OverDueInvoices from "../Reports/ClientReports/OverDueInvoices/OverDueInvoices";
-
+import EmployeeWorkSummary from "../Reports/EmployeeReports/EmployeeWorkSummary/EmployeeWorkSummary";
+import TechnicianLedger from "../Reports/EmployeeReports/TechnicianWorkLedger/TechnicianLedger";
+import FinancialIncomeReports from "../Reports/FinancialReports/FinancialIncomeReports/FinancialIncomeReports";
+import FinancialExpenseReports from "../Reports/FinancialReports/FinancialExpenseReports/FinancialExpenseReports";
+import Bin from "../Bin/Bin";
 
 
 
@@ -154,6 +158,14 @@ const router = createBrowserRouter([
         element: <PaymentSummary></PaymentSummary>,
       },
       {
+        path: "/reports/employee-work-summary",
+        element: <EmployeeWorkSummary></EmployeeWorkSummary>,
+      },
+      {
+        path: "/reports/employee-reports/technician-ledger",
+        element: <TechnicianLedger></TechnicianLedger>,
+      },
+      {
         path: "/reports/overdue-report",
         element: <OverDueInvoices></OverDueInvoices>,
       },
@@ -172,6 +184,19 @@ const router = createBrowserRouter([
         path: "/reports/financial-reports",
         element: <FinancialReports></FinancialReports>,
       },
+      {
+        path: "/reports/financial/income-report",
+        element: <FinancialIncomeReports></FinancialIncomeReports>,
+      },
+      {
+        path: "/reports/financial/expense-report",
+        element: <FinancialExpenseReports></FinancialExpenseReports>,
+      },
+      {
+        path: "/bin",
+        element: <Bin></Bin>
+      }
+      
 
       // {
       //     path: "order/create-case",

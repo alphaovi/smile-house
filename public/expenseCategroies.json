@@ -1,0 +1,34 @@
+[
+  {
+    "group": "Office Supplies",
+    "subGroups": ["Stationery", "Pantry", "Cleaning Supplies", "Printing & Paper"]
+  },
+  {
+    "group": "Utilities",
+    "subGroups": ["Electricity", "Internet", "Water & Sewerage", "Gas"]
+  },
+  {
+    "group": "Asset Purchase",
+    "subGroups": ["IT Equipment", "Furniture", "Vehicles", "Machinery"]
+  },
+  {
+    "group": "Salaries & Wages",
+    "subGroups": ["Full-time Staff", "Contractual", "Bonus", "Overtime"]
+  },
+  {
+    "group": "Rent & Facilities",
+    "subGroups": ["Office Rent", "Warehouse Rent", "Parking Space"]
+  },
+  {
+    "group": "Marketing & Ads",
+    "subGroups": ["Digital Ads", "Print Media", "Events & Sponsorship", "Branding Items"]
+  },
+  {
+    "group": "Maintenance & Repairs",
+    "subGroups": ["AC Repair", "Office Renovation", "Software Renewal", "Hardware Repair"]
+  },
+  {
+    "group": "Travel & Conveyance",
+    "subGroups": ["Local Conveyance", "Client Entertainment", "Business Tour"]
+  }
+]
