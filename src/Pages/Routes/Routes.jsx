@@ -39,6 +39,11 @@ import TechnicianLedger from "../Reports/EmployeeReports/TechnicianWorkLedger/Te
 import FinancialIncomeReports from "../Reports/FinancialReports/FinancialIncomeReports/FinancialIncomeReports";
 import FinancialExpenseReports from "../Reports/FinancialReports/FinancialExpenseReports/FinancialExpenseReports";
 import Bin from "../Bin/Bin";
+import FinancialAssetReports from "../Reports/FinancialReports/FinancialAssetReports/FinancialAssetReports";
+import FinancialLiabilityReports from "../Reports/FinancialReports/FinancialLiabilityReport/FinancialLiabilityReports";
+
+
+
 
 
 
@@ -193,10 +198,17 @@ const router = createBrowserRouter([
         element: <FinancialExpenseReports></FinancialExpenseReports>,
       },
       {
+        path: "/reports/financial/asset-report",
+        element: <FinancialAssetReports></FinancialAssetReports>,
+      },
+      {
+        path: "/report/financial/liability-report",
+        element: <FinancialLiabilityReports></FinancialLiabilityReports>,
+      },
+      {
         path: "/bin",
-        element: <Bin></Bin>
-      }
-      
+        element: <Bin></Bin>,
+      },
 
       // {
       //     path: "order/create-case",

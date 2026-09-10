@@ -50,9 +50,9 @@ const FinancialReports = () => {
     {
       id: 'liability',
       title: 'Liability Report',
-      description: 'Manage outstanding debts, payables, and obligations.',
+      description: 'Manage outstanding debts, pay ables, and obligations.',
       route: '/report/financial/liability-report',
-      badge: 'Payables',
+      badge: 'Pay ables',
       badgeColor: 'bg-amber-50 text-amber-700 border-amber-200',
       iconBg: 'bg-amber-500',
       icon: (
