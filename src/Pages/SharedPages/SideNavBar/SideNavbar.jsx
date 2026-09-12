@@ -218,7 +218,7 @@ const SideNavbar = () => {
   // Dynamic Multi-level Recursive Menu Renderer
   const renderNavList = (items, isMobile = false) => {
     return items.map((item, index) => (
-      <li key={index}>
+      <li key={index} className="w-full">
         {item.children ? (
           <details
             className={
@@ -227,14 +227,14 @@ const SideNavbar = () => {
                 : ""
             }
           >
-            <summary className="flex items-center justify-between gap-4 py-2 hover:bg-base-300 rounded-lg cursor-pointer">
-              <div className="flex items-center gap-3">
-                {item.icon}
+            <summary className="flex items-center justify-between min-h-10 px-3 py-2 hover:bg-base-300 rounded-lg cursor-pointer transition-colors duration-150 list-none [&::-webkit-details-marker]:hidden">
+              <div className="flex items-center gap-3 overflow-hidden">
+                <span className="shrink-0">{item.icon}</span>
                 <span
                   className={`${
                     !isMobile
                       ? "opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap"
-                      : ""
+                      : "whitespace-nowrap"
                   } font-medium text-sm`}
                 >
                   {item.name}
@@ -255,14 +255,14 @@ const SideNavbar = () => {
           <NavLink
             to={item.link || "#"}
             onClick={() => isMobile && setIsMobileOpen(false)}
-            className="flex items-center gap-3 py-2 text-sm text-base-content/80 hover:text-primary rounded-md whitespace-nowrap hover:bg-base-100"
+            className="flex items-center gap-3 min-h-10 px-3 py-2 text-sm text-base-content/80 hover:text-primary rounded-lg whitespace-nowrap hover:bg-base-100 transition-colors duration-150"
           >
-            {item.icon}
+            <span className="shrink-0">{item.icon}</span>
             <span
               className={
                 !isMobile
-                  ? "opacity-0 group-hover:opacity-100 transition-opacity duration-200"
-                  : ""
+                  ? "opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap"
+                  : "whitespace-nowrap"
               }
             >
               {item.name}
@@ -274,18 +274,18 @@ const SideNavbar = () => {
   };
 
   const renderBinItem = (item, isMobile = false) => (
-    <li>
+    <li className="w-full">
       <NavLink
         to={item.link || "#"}
         onClick={() => isMobile && setIsMobileOpen(false)}
-        className="flex items-center gap-3 py-2 text-sm text-base-content/80 hover:text-primary rounded-md whitespace-nowrap hover:bg-base-100 shadow-[0_-2px_8px_rgba(0,0,0,0.08)]"
+        className="flex items-center gap-3 min-h-10 px-3 py-2 text-sm text-base-content/80 hover:text-primary rounded-lg whitespace-nowrap hover:bg-base-100 transition-colors duration-150"
       >
-        {item.icon}
+        <span className="shrink-0">{item.icon}</span>
         <span
           className={
             !isMobile
-              ? "opacity-0 group-hover:opacity-100 transition-opacity duration-200"
-              : ""
+              ? "opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap"
+              : "whitespace-nowrap"
           }
         >
           {item.name}
@@ -300,14 +300,14 @@ const SideNavbar = () => {
       <aside
         ref={sidebarRef}
         onMouseLeave={handleMouseLeave}
-        className="hidden md:flex group z-20 flex-col bg-base-200 w-16 hover:w-64 transition-all duration-300 ease-in-out shadow-lg overflow-hidden justify-between h-full"
+        className="hidden md:flex group z-20 flex-col bg-base-200 w-16 hover:w-64 transition-all duration-300 ease-in-out shadow-lg overflow-hidden justify-between h-full shrink-0"
       >
-        <ul className="menu w-full p-2 space-y-1 grow pt-6 primaryColor overflow-y-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+        <ul className="menu w-full p-2 space-y-1 grow pt-6 primaryColor overflow-y-auto overflow-x-hidden [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
           {renderNavList(navItems, false)}
         </ul>
 
         {/* Bottom Fixed Bin Item */}
-        <div className="w-full shrink-0 bg-base-200">
+        <div className="w-full shrink-0 bg-base-200 border-t border-base-300">
           <ul className="menu w-full p-2 primaryColor">
             {renderBinItem(binItem, false)}
           </ul>
@@ -345,7 +345,7 @@ const SideNavbar = () => {
         </div>
 
         {/* Bottom Fixed Bin Item (Mobile) */}
-        <div className="w-full shrink-0 bg-base-200">
+        <div className="w-full shrink-0 bg-base-200 border-t border-base-300">
           <ul className="menu w-full p-4 primaryColor">
             {renderBinItem(binItem, true)}
           </ul>
@@ -353,7 +353,7 @@ const SideNavbar = () => {
       </aside>
 
       {/* ---------------- Main Content Area ---------------- */}
-      <div className="flex flex-1 flex-col overflow-y-auto">
+      <div className="flex flex-1 flex-col overflow-y-auto min-w-0">
         <nav className="navbar h-16 w-full bg-base-300 border-b border-base-200 px-4 secondaryColor flex items-center gap-3 shrink-0">
           {/* Mobile Menu Toggle Button */}
           <button
